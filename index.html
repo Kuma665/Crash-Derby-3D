@@ -1088,8 +1088,7 @@ function render(){if(WX===3)rainStep();if(WX===4)sandStep();
     [[o.dl,-1],[o.dr,1]].forEach(([p,s])=>{if(!at(p))return;const dd=p.d||0,hg=p.hg?cl(.55+.6*dd+Math.sin(camT*.17+s)*.1*(.4+Math.min(1,sp)),0,1.25):dd*.5;p.position.set(5-5*Math.cos(hg),6-(p.hg?hg*.9:0),s*(9.4+5*Math.sin(hg)));p.rotation.y=s*hg;p.rotation.z=p.hg?s*.12*hg:0});
     o.gen.forEach((p,k)=>{if(!at(p))return;const h=p.userData.h||(p.userData.h=p.position.clone()),dd=p.d||0,sg=Math.sign(h.z)||1;p.position.z=h.z-sg*dd*1.6;p.scale.y=1-.3*dd;if(p.hg)p.rotation.set(sg*(.3+.25*Math.sin(camT*.25+k)),Math.sin(camT*.2+k)*.2,0)});
     if(at(o.roof)){const r=o.roof,dd=r.d||0;r.scale.y=1-.6*dd;r.position.y=15.5-dd*1.4;r.rotation.z=(d.b-d.f)*.15+(r.hg?Math.sin(camT*.3)*.15:0);r.rotation.x=(d.r-d.l)*.15}
-    {const wd=o.wpx===undefined?0:cl((c.x-o.wpx)*Math.cos(c.a)+(c.y-o.wpy)*Math.sin(c.a),-20,20);o.wpx=c.x;o.wpy=c.y;o.wrA=((o.wrA||0)-cl(wd/(3*(c.vk===7?1.75:c.vk===3?1.35:1)),-.45,.45))%6.2832}
-    o.ws.forEach((w,i)=>{if(at(w)){if(w.children[0])w.children[0].rotation.z=o.wrA;const dd=(i<2?d.l:d.r)*.4+(i%2?d.f:d.b)*.3;w.rotation.x=dd*(i%2?1:-1)*.8;w.rotation.z=w.hg?Math.sin(camT*.35+i)*.3:0;const u=w.userData;u.s=u.s||w.scale.clone();u.y=u.y===undefined?w.position.y:u.y;w.scale.y=u.s.y*(w.fl?.55:1);w.position.y=u.y-(w.fl?1.1:0)}});
+    o.ws.forEach((w,i)=>{if(at(w)){const dd=(i<2?d.l:d.r)*.4+(i%2?d.f:d.b)*.3;w.rotation.x=dd*(i%2?1:-1)*.8;w.rotation.z=w.hg?Math.sin(camT*.35+i)*.3:0;const u=w.userData;u.s=u.s||w.scale.clone();u.y=u.y===undefined?w.position.y:u.y;w.scale.y=u.s.y*(w.fl?.55:1);w.position.y=u.y-(w.fl?1.1:0)}});
     o.cab.rotation.x=(d.l-d.r)*.25;o.cab.rotation.z=(d.b-d.f)*.2;o.cab.scale.y=1-.3*(d.f+d.b);
   }
   if(MAP)CROWD.forEach((m,i)=>{m.position.y=Math.sin(performance.now()*.005+i*2)*.8});for(const p of parts){p.m.position.set(p.x-W/2,p.h+GH(p.x,p.y),p.y-W/2);if(p.sm)p.m.scale.setScalar(1+(p.l0-p.l)/10)}
