@@ -747,15 +747,15 @@ const ITT=[['🔧','#2e9e4f'],['💥','#c98a00'],['🛡️','#2f7fd6'],['🔋','
 let ITM=[],itT=180,itF=1;
 function itOn(){return TUNE.iq!==0&&(!RACE||TUNE.ri!==0)}
 /* ===== Modus „Zone halten“ (GM 4): wandernde Zone, wer drinsteht, sammelt Punkte ===== */
-const ZR=150;let ZM=null,ZW=null,ZG=null,ZN={x:W/2,y:W/2,t:0,n:0,f:0,o:null};
+const ZR=150;let ZM=null,ZW=null,ZB=null,ZG=null,ZN={x:W/2,y:W/2,t:0,n:0,f:0,o:null};
 function zPick(){for(let n=0;n<60;n++){let x,y;if(MAP>=2){const rx=MAP===2?HARBOR_X:QUARRY_EDGE,ry=MAP===2?HARBOR_Y:QUARRY_EDGE;x=W/2+(Math.random()*2-1)*(rx-ZR*.6);y=W/2+(Math.random()*2-1)*(ry-ZR*.6)}else{x=ZR+140+Math.random()*(W-2*ZR-280);y=ZR+140+Math.random()*(W-2*ZR-280)}
   if(MAP&&outsideArena(x,y,ZR+40))continue;if(MAP===1&&(y<PY1+ZR+40||RMP.some(r=>Math.hypot(x-r.cx,y-r.cy)<r.L/2+ZR)))continue;
   if(ACTIVE_OBS.some(o=>o.m.visible&&Math.hypot(x-o.x,y-o.y)<o.r+ZR*.7))continue;if(n<40&&Math.hypot(x-ZN.x,y-ZN.y)<450)continue;return{x,y}}return{x:W/2,y:W/2}}
 function zMove(){const p=zPick();ZN.x=p.x;ZN.y=p.y;ZN.t=1200;if(ZM)ZM.position.set(p.x-W/2,mapH(p.x,p.y)+1.5,p.y-W/2)}
 function zInit(){if(GM!==4){if(ZM)ZM.visible=false;return}
-  if(!ZM){ZM=new THREE.Group();ZG=new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.75,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});const r=new THREE.Mesh(new THREE.RingGeometry(ZR-9,ZR,56),ZG);r.rotation.x=-Math.PI/2;ZM.add(r);
-    const fm=new THREE.Mesh(new THREE.CircleGeometry(ZR-9,40),new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.1,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));fm.rotation.x=-Math.PI/2;ZM.add(fm);
-    ZW=new THREE.Mesh(new THREE.CylinderGeometry(ZR,ZR,46,48,1,true),new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.16,side:THREE.DoubleSide,depthWrite:false}));ZW.position.y=23;ZM.add(ZW);ZW.material.color=ZG.color;fm.material.color=ZG.color;S.add(ZM)}
+  if(!ZM){ZM=new THREE.Group();ZG=new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.75,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});const r=new THREE.Mesh(new THREE.RingGeometry(ZR-16,ZR,56),ZG);r.rotation.x=-Math.PI/2;ZM.add(r);
+    const fm=new THREE.Mesh(new THREE.CircleGeometry(ZR-16,40),new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.2,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));fm.rotation.x=-Math.PI/2;ZM.add(fm);
+    ZW=new THREE.Mesh(new THREE.CylinderGeometry(ZR,ZR,110,48,1,true),new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.3,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));ZW.position.y=55;ZB=new THREE.Mesh(new THREE.CylinderGeometry(9,9,900,10,1,true),new THREE.MeshBasicMaterial({color:0xffd23d,transparent:true,opacity:.55,depthWrite:false,blending:THREE.AdditiveBlending,fog:false}));ZB.position.y=450;ZB.material.color=ZG.color;ZM.add(ZB);ZM.add(ZW);ZW.material.color=ZG.color;fm.material.color=ZG.color;S.add(ZM)}
   ZM.visible=true;ZN.x=W/2;ZN.y=W/2;ZN.n=0;ZN.f=0;ZN.o=null;zMove();ZN.t=1200;for(const c of cars)c.izn=0}
 /* ===== Modus „Feuerring“ (GM 5): Flammenring zieht sich zusammen, draußen gibt es Schaden ===== */
 let FRM=null,FRW=null,FR={x:W/2,y:W/2,x0:W/2,y0:W/2,x1:W/2,y1:W/2,r:1100,f:0};const FR0=1100,FR1=190,FRT=2700;
@@ -785,7 +785,7 @@ function boostFx(c,big){if(c.hi>=0){rumble(c.hi,big?6:4);if(AC){const t=AC.curre
 function lowHp(){if(!AC||state!=='play'||cdT>0||(lowHp.n=(lowHp.n|0)+1)%46)return;for(const c of cars)if(c.hi>=0&&c.hp>0&&c.hp<c.hm*.25){const t=AC.currentTime;tone(t,160,100,.12,.2,'triangle');tone(t+.16,140,90,.11,.14,'triangle');break}}
 function zoneStep(){frStep();if(!ZM)return;ZM.visible=GM===4&&state!=='idle';if(GM!==4||state!=='play'||cdT>0)return;
   if(--ZN.t<=0){zMove();feed('👑 Die Zone wandert!','#ffd23d');if(AC){const t=AC.currentTime;tone(t,520,780,.22,.16,'triangle');tone(t+.12,780,1040,.22,.13,'triangle')}}
-  const bl=ZN.t<180&&((ZN.t/8|0)&1);ZW.material.opacity=bl?.03:.13+.05*Math.sin(ZN.f*.1);ZG.opacity=bl?.25:.75;
+  const bl=ZN.t<180&&((ZN.t/8|0)&1);ZW.material.opacity=bl?.05:.17+.05*Math.sin(ZN.f*.1);ZB.material.opacity=bl?.15:.5;ZG.opacity=bl?.25:.75;
   if(++ZN.f%6)return;let n=0,o=null;for(const c of cars){const p=c.izn;c.izn=c.hp>0&&(c.z||0)<30&&Math.hypot(c.x-ZN.x,c.y-ZN.y)<ZR?1:0;if(c.izn){n++;o=c}if(c.hi>=0&&c.izn&&!p&&c.izq!==ZN.t>>6){c.izq=ZN.t>>6;pmsg(c.hi,'👑 In der Zone!','#ffd23d')}}
   for(const c of cars)if(c.izn)c.p+=n===1?3:1;const no=n===1?o:null;if(n!==ZN.n||no!==ZN.o){ZN.n=n;ZN.o=no;if(n===1)ZG.color.copy(o.o.base);else ZG.color.setHex(n?0xff3a2a:0xffd23d)}}
 const GRNC=new THREE.Color(0x3dff5e),REDC=new THREE.Color(0xff3a2a);const ITI=ITT.map(([e,bg])=>{const k=document.createElement('canvas');k.width=k.height=32;const g=k.getContext('2d');g.fillStyle=bg;g.beginPath();g.arc(16,16,14,0,6.2832);g.fill();g.strokeStyle='#fff';g.lineWidth=2;g.stroke();g.font='17px sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText(e,16,17);return k});function itClear(){ITM.forEach(i=>S.remove(i.m));ITM=[];itT=180;itF=1}
