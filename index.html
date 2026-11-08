@@ -108,7 +108,7 @@ canvas{border-color:#0b0805;box-shadow:0 0 0 2px var(--acc),0 12px 32px rgba(0,0
 #mm{border:2px solid rgba(255,255,255,.35)}
 .ctl button{border-radius:50%;background:rgba(30,24,16,.72);color:#fff;border:2px solid rgba(255,255,255,.35);box-shadow:0 4px 0 rgba(0,0,0,.45)}
 .ctl button.on{background:var(--acc);color:#1c1712;box-shadow:0 0 18px rgba(224,161,0,.8);transform:translateY(3px)}
-#ov::before,body.demo header .bar,body.demo #al,body.demo .wrap>*:not(canvas):not(#ov):not(#ttl),body.demo .ctl{visibility:hidden!important}body.demo #ov,body.demo #ttl{visibility:visible!important}body.ttl #ov,body.demo.ttl #ov{visibility:hidden!important}
+#ov::before,body.demo header .bar,body.demo #al,body.demo .wrap>*:not(canvas):not(#ov):not(#ttl),body.demo .ctl{visibility:hidden!important}body.demo #ov,body.demo #ttl{visibility:visible!important}body.ttl #ov,body.demo.ttl #ov{visibility:hidden!important}body.demo header h1,body.demo #hint,body.ttl header h1,body.ttl #hint{visibility:hidden!important}
 #ov[data-s=main]{background:radial-gradient(ellipse at 50% 30%,rgba(40,26,10,.42),rgba(8,5,2,.72));-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px)}
 #ov::after{content:'';position:absolute;left:0;right:0;height:10px;background:repeating-linear-gradient(-45deg,#e0a100 0 14px,#1c1712 14px 28px);opacity:.9}
 #ov::before{top:0}#ov::after{position:relative;bottom:auto;left:auto;right:auto;flex:none;margin:6px -14px 0}
@@ -303,7 +303,7 @@ h1{font-size:23px;letter-spacing:7px}
 </details>
 <div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
-<p>Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
+<p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="musik.js"></script>
 <script>
