@@ -1092,7 +1092,7 @@ function render(){if(WX===3)rainStep();if(WX===4)sandStep();
     cam.aspect=vw/vh;cam.fov=[62,55,78,62][CM]+Math.min(20,Math.hypot(P.vx,P.vy)*2)*(CM===0||CM===3?1:.5)+(P.nb?8:0)-kick;cam.updateProjectionMatrix();
     P.cz=P.cz===undefined?(P.z||0):P.cz+((P.z||0)-P.cz)*.18;P.cdz=(P.cdz||70)+((P.nb?80:70)-(P.cdz||70))*.07;cam.position.set(px-dx*P.cdz+(P.cnx||0)+(Math.random()-.5)*shake,36+P.cz*.7+(Math.random()-.5)*shake,pz-dz*P.cdz+(P.cny||0)+(Math.random()-.5)*shake);
     cam.lookAt(px+dx*40+(P.cnx||0)*.4,6+P.cz*.5,pz+dz*40+(P.cny||0)*.4);if(state==='replay'){const Fc=lastK||P,fx=Fc.x-W/2,fz=Fc.y-W/2,fy=Fc.z||0,md=((rpI/70)|0)%3,an=rpI*.012;if(md===0)cam.position.set(fx+Math.cos(an)*95,18+fy,fz+Math.sin(an)*95);else if(md===1)cam.position.set(fx+70,150+fy,fz+70);else cam.position.set(fx-Math.cos(Fc.a)*50,9+fy,fz-Math.sin(Fc.a)*50);cam.lookAt(fx,8+fy,fz)}
-    if(CM===1){cam.position.set(px-dx*130+(Math.random()-.5)*shake,175+P.cz*.7+(Math.random()-.5)*shake,pz-dz*130);cam.lookAt(px+dx*60,0,pz+dz*70)}
+    if(CM===1){cam.position.set(px-dx*150+(Math.random()-.5)*shake,240+P.cz*.7+(Math.random()-.5)*shake,pz-dz*150);cam.lookAt(px+dx*70,0,pz+dz*70)}
     else if(CM===2){const ax=Math.cos(P.a),az=Math.sin(P.a),sc=P.o.grp.scale,fx=9*sc.x,hy=13.5*sc.y+P.z;cam.position.set(px+ax*fx+(Math.random()-.5)*shake*.5,hy+(Math.random()-.5)*shake*.5,pz+az*fx);cam.lookAt(px+ax*90,hy-2.5*sc.y,pz+az*90)}
 else if(CM===3){cam.position.set(px-dx*150+(Math.random()-.5)*shake,80+P.z*.7+(Math.random()-.5)*shake,pz-dz*150+(Math.random()-.5)*shake);cam.lookAt(px+dx*60,5+P.z*.5,pz+dz*60)}
     if(LB[i]&&state==='play'){cam.position.set(px+dx*80+(Math.random()-.5)*shake,40+P.z*.7+(Math.random()-.5)*shake,pz+dz*80);cam.lookAt(px-dx*60,6+P.z*.5,pz-dz*60)}
