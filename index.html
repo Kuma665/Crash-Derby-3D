@@ -759,7 +759,7 @@ let FRM=null,FRW=null,FR={x:W/2,y:W/2,x0:W/2,y0:W/2,x1:W/2,y1:W/2,r:1100,f:0};co
 function frInit(){if(GM!==5){if(FRM)FRM.visible=false;return}
   if(!FRM){FRM=new THREE.Group();const g=new THREE.MeshBasicMaterial({color:0xff5a1a,transparent:true,opacity:.85,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),r=new THREE.Mesh(new THREE.RingGeometry(.975,1,96),g);r.rotation.x=-Math.PI/2;FRM.add(r);
     FRW=new THREE.Mesh(new THREE.CylinderGeometry(1,1,70,72,1,true),new THREE.MeshBasicMaterial({color:0xff6a20,transparent:true,opacity:.28,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));FRW.position.y=30;FRM.add(FRW);S.add(FRM)}
-  const p=zPick();FR.x0=W/2;FR.y0=W/2;FR.x1=(p.x+W/2)/2;FR.y1=(p.y+W/2)/2;FR.f=0;frPos();FRM.visible=true;for(const c of cars)c.frc=0}
+  const p=zPick();FR.x0=W/2;FR.y0=W/2;FR.x1=p.x;FR.y1=p.y;FR.f=0;frPos();FRM.visible=true;for(const c of cars)c.frc=0}
 function frPos(){const k=Math.min(1,FR.f/FRT),e=k*k*(3-2*k);FR.r=FR0+(FR1-FR0)*e;FR.x=FR.x0+(FR.x1-FR.x0)*e;FR.y=FR.y0+(FR.y1-FR.y0)*e;FRM.scale.set(FR.r,1,FR.r);FRM.position.set(FR.x-W/2,mapH(FR.x,FR.y)-8,FR.y-W/2)}
 function frStep(){if(!FRM)return;FRM.visible=GM===5&&state!=='idle';if(GM!==5||state!=='play'||cdT>0)return;
   if(FR.f<FRT){FR.f++;frPos();if(FR.f===1||FR.f===FRT/2|0){feed(FR.f===1?'🔥 Der Feuerring zieht sich zusammen!':'🔥 Der Ring ist nur noch halb so groß!','#ff7a2a')}if(FR.f===FRT)feed('🔥 Showdown! Der Ring ist am kleinsten.','#ff7a2a')}
