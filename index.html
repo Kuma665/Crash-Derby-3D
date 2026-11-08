@@ -1002,6 +1002,8 @@ function step(){
       }
     }
   }
+  /* Nachkontrolle: durch Auto-Kollisionen in Stufen/Wände/Hindernisse gedrückt? -> letzte gültige Position */
+  if(MAP)for(const c of cars){if(c.air||c.px===undefined)continue;const rr=c.r*.9,z=c.z||0;let h=mapH(c.x,c.y),bad=false;for(let k=0;k<8&&!bad;k++){const v=mapH(c.x+Math.cos(k*.7854)*rr,c.y+Math.sin(k*.7854)*rr);if(v>h)h=v}if(h-z>7)bad=true;if(!bad)for(const o of ACTIVE_OBS){if(!o.m.visible||!o.rect||(o.h&&z>o.h-4))continue;const dx=c.x-o.x,dy=c.y-o.y,ca=Math.cos(o.a),sa=Math.sin(o.a),u=dx*ca+dy*sa,v=-dx*sa+dy*ca;if(Math.abs(u)<o.w/2+c.r*.45&&Math.abs(v)<o.d/2+c.r*.45){bad=true;break}}if(bad){c.x=c.px;c.y=c.py}}
   for(const n of CN){if(!n.m.visible)continue;for(const c of cars){const dx=n.x-c.x,dy=n.y-c.y;if(dx*dx+dy*dy<400&&n.vh===0){const sp=Math.hypot(c.vx,c.vy);if(sp>1){n.vx=c.vx*1.3+dx*.05;n.vy=c.vy*1.3+dy*.05;n.vh=2+sp*.5;n.sr=(Math.random()-.5)*.6}}}
     n.x+=n.vx;n.y+=n.vy;n.h+=n.vh;n.vh-=.15;if(n.h<=0){n.h=0;if(Math.abs(n.vh)>.5)n.vh=-n.vh*.3;else n.vh=0;n.vx*=.85;n.vy*=.85;n.sr*=.8}
     n.x=cl(n.x,30,W-30);n.y=cl(n.y,30,W-30);n.m.rotation.z+=n.sr;n.m.position.set(n.x-W/2,n.h+GH(n.x,n.y)+3.5,n.y-W/2)}
