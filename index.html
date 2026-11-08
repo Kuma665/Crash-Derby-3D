@@ -796,7 +796,7 @@ function control(c){
   if(c.hp<=0)return[0,0];
   if(cdT>0)return[0,0,0,0];
   if(c.hi>=0)return inp(c.hi);
-  if(RACE){const info=trackInfo(c.x,c.y),p=trackPoint(info.idx+7),lane=cl(c.ln,-TRACK_HALF*.38,TRACK_HALF*.38),d=nrm(Math.atan2(p.y+info.ny*lane-c.y,p.x+info.nx*lane-c.x)-c.a);let tt=[.8,.92,1][TUNE.bd|0],st=cl(d*[2.5,3.5,4.5][TUNE.bd|0],-1,1);if(Math.hypot(c.vx,c.vy)<.5)c.stuck++;else c.stuck=0;if(c.stuck>40){c.rev=45;c.stuck=0}if(c.rev>0){c.rev--;tt=-1;st=-st}return[tt,st,botNit(c,TUNE.bd&&Math.abs(d)<.12&&c.rev<=0)?1:0,0,botAb(c)]}
+  if(RACE){const info=trackInfo(c.x,c.y),p=trackPoint(info.idx+7),lane=cl(c.ln,-TRACK_HALF*.38,TRACK_HALF*.38),d=nrm(Math.atan2(p.y+info.ny*lane-c.y,p.x+info.nx*lane-c.x)-c.a);let tt=[.8,.92,1][TUNE.bd|0],st=cl(d*[2.5,3.5,4.5][TUNE.bd|0],-1,1);if(Math.hypot(c.vx,c.vy)<.5)c.stuck++;else c.stuck=0;if(c.stuck>40){c.rev=45;c.stuck=0}{let hb=-1;for(const o of cars)if(o.hi>=0&&o.hp>0&&o.prog>hb)hb=o.prog;if(hb>=0&&!c.fin){const g=(c.prog-hb)/TRACKS[RMAP].length;if(g>.25)tt*=.92;else if(g<-.25)tt*=1.08}}if(c.rev>0){c.rev--;tt=-1;st=-st}return[tt,st,botNit(c,TUNE.bd&&Math.abs(d)<.12&&c.rev<=0)?1:0,0,botAb(c)]}
   let t=null,bd=1e9;
   for(const o of cars){if(o===c||o.hp<=0||ally(o,c))continue;const d=Math.hypot(o.x-c.x,o.y-c.y)*(TUNE.bd===2&&o.hi>=0?.6:1);if(d<bd){bd=d;t=o}}
   if(!t)return[0,0];
