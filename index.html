@@ -257,6 +257,9 @@ h1{font-size:23px;letter-spacing:7px}
 @media (orientation:landscape) and (max-height:520px) and (pointer:coarse){.hud,.p2 .hud,.p3 .hud,.p4 .hud{margin-bottom:4px}}
 .hud.sm .hs b{font-size:27px}
 @media (orientation:landscape) and (max-height:520px){.hud .hs b{font-size:26px}.hud.sm .hs b{font-size:20px}.hud .hs small{font-size:9px;letter-spacing:1px}.hud .hb{height:9px}.hud .hb.nn{height:7px}.hud{width:min(22%,120px)}.hud.sm{width:min(22%,95px)}}
+#ov #ot.lg{display:flex;align-items:center;justify-content:center;gap:.28em;background:none;-webkit-text-fill-color:initial;text-shadow:none;animation:none;filter:none;transform:none;text-transform:none;letter-spacing:0;line-height:1;padding:.08em .1em .12em}
+#ot.lg .l1{padding:.04em .2em .06em .1em;font-weight:900;font-style:italic;letter-spacing:.06em;background:linear-gradient(#fff3b0,#ffcf3d 45%,#ff7a1a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 14px rgba(255,140,30,.45))}
+#ot.lg .l3{font-size:.6em;font-weight:900;font-style:italic;letter-spacing:.12em;color:#fff;-webkit-text-fill-color:#fff;background:#c8281e;padding:0 .45em;transform:skewX(-14deg);border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.6)}
 </style></head><body class="p1">
 <header><h1>CRASH DERBY 3D</h1><div class="bar bx"><div id="hp"></div><i class="nt"></i></div><div class="bar bx"><div id="hp2"></div><i class="nt"></i></div><div class="bar bx"><div id="hp3"></div><i class="nt"></i></div><div class="bar bx"><div id="hp4"></div><i class="nt"></i></div><div id="al">Übrig: 5</div></header>
 <div class="wrap"><canvas id="c"></canvas><div class="dv"></div><div class="dh"></div><div class="lbl" style="left:12px">P1</div><div class="lbl" style="left:calc(50% + 12px)">P2</div><div class="lbl" style="left:12px;top:calc(50% + 10px)">P3</div><div class="lbl" style="left:calc(50% + 12px);top:calc(50% + 10px)">P4</div>
@@ -463,6 +466,7 @@ const PIL=[],CROWD=[],M2=new THREE.Group();M2.visible=false;S.add(M2);
  for(let i=0;i<6;i++){const [x,z]=ell(i/6*6.2832+.5,112),p=new THREE.Mesh(new THREE.CylinderGeometry(2.5,4,115,8),new THREE.MeshLambertMaterial({color:0x666a6e}));p.position.set(x,57,z);M2.add(p);const hd=new THREE.Mesh(new THREE.BoxGeometry(30,8,12),new THREE.MeshBasicMaterial({color:0xfff2c0}));hd.position.set(x,118,z);hd.rotation.y=-Math.atan2(z,x)+Math.PI/2;M2.add(hd);const gs=new THREE.Sprite(new THREE.SpriteMaterial({map:gT,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,fog:false}));gs.scale.set(100,100,1);gs.position.set(x,118,z);M2.add(gs)}
  /* Kran */
  {const [x,z]=ell(.35,130),cm=new THREE.MeshLambertMaterial({color:0xd98a10});const tw=new THREE.Mesh(new THREE.BoxGeometry(9,170,9),cm);tw.position.set(x,85,z);M2.add(tw);const bm=new THREE.Mesh(new THREE.BoxGeometry(170,6,6),cm);bm.position.set(x-50,170,z);bm.rotation.y=.4;M2.add(bm);const cw=new THREE.Mesh(new THREE.BoxGeometry(24,14,14),dkM);cw.position.set(x+38,168,z-15);M2.add(cw)}
+ M2.traverse(o=>{if(o.isInstancedMesh)o.frustumCulled=false});
 }
 function applyMap(){ENV.forEach(o=>o.visible=MAP<2&&MAP!==1);RAMP_OBJS.forEach(o=>o.visible=!RACE&&MAP===0);ARENA_GROUPS.forEach(o=>o.visible=o.userData.map===MAP);ARENA_FLOORS.forEach((o,i)=>o.visible=MAP===i+2);ground.visible=MAP<2;fl.visible=true;M2.visible=MAP===1;(M2.userData.ramps||[]).forEach(m=>m.visible=!RACE);ACTIVE_OBS=MAP===1?OB.concat(PIL):MAP>=2?OB.concat(ARENA_OBS.filter(o=>o.map===MAP)):OB;fl.material.color.setHex(RACE&&MAP===0?0x6b5440:[0x2a2622,0x4d4d4a,0x243b43,0x40382e][MAP]);OB.forEach((o,i)=>{o.m.position.y=mapH(o.x,o.y)+(i===0?16:11);o.m.visible=!RACE&&MAP===0&&(i?TUNE.ob===1:true)});arrangeArena();updateGround()}
 const wheelG=new THREE.BoxGeometry(8,6,3),wheelM=new THREE.MeshLambertMaterial({color:0x111111});
@@ -866,7 +870,7 @@ function step(){
       }
     }
   }
-  for(const n of CN){for(const c of cars){const dx=n.x-c.x,dy=n.y-c.y;if(dx*dx+dy*dy<400&&n.vh===0){const sp=Math.hypot(c.vx,c.vy);if(sp>1){n.vx=c.vx*1.3+dx*.05;n.vy=c.vy*1.3+dy*.05;n.vh=2+sp*.5;n.sr=(Math.random()-.5)*.6}}}
+  for(const n of CN){if(!n.m.visible)continue;for(const c of cars){const dx=n.x-c.x,dy=n.y-c.y;if(dx*dx+dy*dy<400&&n.vh===0){const sp=Math.hypot(c.vx,c.vy);if(sp>1){n.vx=c.vx*1.3+dx*.05;n.vy=c.vy*1.3+dy*.05;n.vh=2+sp*.5;n.sr=(Math.random()-.5)*.6}}}
     n.x+=n.vx;n.y+=n.vy;n.h+=n.vh;n.vh-=.15;if(n.h<=0){n.h=0;if(Math.abs(n.vh)>.5)n.vh=-n.vh*.3;else n.vh=0;n.vx*=.85;n.vy*=.85;n.sr*=.8}
     n.x=cl(n.x,30,W-30);n.y=cl(n.y,30,W-30);n.m.rotation.z+=n.sr;n.m.position.set(n.x-W/2,n.h+3.5,n.y-W/2)}
   stepParticles();
@@ -1068,6 +1072,7 @@ const PVR=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuff
 function pvCar(i){const s=SEL[i];let m=PVM[i];if(!m||m.v!==s.v){if(m){PVS.remove(m.o.grp);disp(m.o.grp)}m={v:s.v,o:mkCar(s.c,true,i+1,VT[s.v],s.c2)};PVS.add(m.o.grp);PVM[i]=m}return m.o}
 (function pvLoop(){requestAnimationFrame(pvLoop);if(SCR!=='pick'||OV.hidden||TTL)return;document.querySelectorAll('.cp').forEach(cn=>{const i=+cn.dataset.i,o=pvCar(i),s=SEL[i];PVM.forEach(m=>{if(m)m.o.grp.visible=false});o.grp.visible=true;o.bm.color.set(s.c);o.pans.forEach(p=>p.material.color.set(p.userData.t2?s.c2:s.c));o.grp.rotation.y=performance.now()*.0008+i;PVC.position.set(0,36,76);PVC.lookAt(0,9,0);PVR.render(PVS,PVC);const g=cn.getContext('2d');g.clearRect(0,0,240,130);g.drawImage(PVR.domElement,0,0,240,130)})})();
 var OT0=$('ot').textContent,OS0=$('os').textContent;
+{const ot=$('ot'),lg=()=>{const on=/^crash derby 3d$/i.test(ot.textContent.trim());ot.classList.toggle('lg',on);if(on&&!ot.querySelector('.l3'))ot.innerHTML='<span class="l1">CRASH DERBY</span> <span class="l3">3D</span>'};new MutationObserver(lg).observe(ot,{childList:true});lg()}
 /* Im Hintergrund: Ton stoppen und Spiel pausieren */
 function bgOff(){try{if(state==='play')togglePause()}catch(e){}try{if(AC&&AC.state==='running')AC.suspend()}catch(e){}}
 function bgOn(){try{if(AC&&AC.state==='suspended')AC.resume()}catch(e){}}
