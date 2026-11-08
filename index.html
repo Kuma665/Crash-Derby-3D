@@ -579,7 +579,7 @@ function audioInit(){
   const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;ds.connect(lp);lp.connect(mus);rv=AC.createConvolver();const rb=AC.createBuffer(2,AC.sampleRate*1.4|0,AC.sampleRate);for(let c=0;c<2;c++){const d=rb.getChannelData(c);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2.5)}rv.buffer=rb;const rg=AC.createGain();rg.gain.value=.35;rv.connect(rg);rg.connect(mus);
   ef=AC.createBiquadFilter();ef.type='lowpass';eg=AC.createGain();eg.gain.value=0;ef.connect(eg);eg.connect(sfx);
   eo=AC.createOscillator();eo.type='triangle';eo.connect(ef);eo.start();eo2=AC.createOscillator();eo2.type='sine';eo2.connect(ef);eo2.start();
-  setInterval(()=>{if(AC.state!=='running'){if(!MMA.paused)MMA.pause();return}if(state!=='play'){smp(0);if(TUNE.mt===0)smLoad();nextT=0;stp=0;if(!MMA.error&&!MMA.mmf){MMA.volume=muted?0:Math.min(1,.4*TUNE.vm);if(MMA.paused)MMA.play().catch(()=>{MMA.mmf=1});return}if(!mnT)mnT=AC.currentTime+.08;while(mnT<AC.currentTime+.15){mmenu(mns++,mnT);mnT+=.3333}return}if(!MMA.paused)MMA.pause();mnT=0;if(TUNE.mt===0&&smLd!==2){smLoad();smp(1);return}smp(0);
+  setInterval(()=>{if(AC.state!=='running'){if(!MMA.paused)MMA.pause();return}if(state!=='play'){smp(0);if(TUNE.mt===0)smLoad();nextT=0;stp=0;if(!MMA.error&&!MMA.mmf){MMA.volume=muted?0:Math.min(1,.15*TUNE.vm);if(MMA.paused)MMA.play().catch(()=>{MMA.mmf=1});return}if(!mnT)mnT=AC.currentTime+.08;while(mnT<AC.currentTime+.15){mmenu(mns++,mnT);mnT+=.3333}return}if(!MMA.paused)MMA.pause();mnT=0;if(TUNE.mt===0&&smLd!==2){smLoad();smp(1);return}smp(0);
     if(!nextT)nextT=AC.currentTime+.08;
     while(nextT<AC.currentTime+.15){(TUNE.mt===2?mmetal:mst3)(stp++,nextT);nextT+=TUNE.mt===2?.085:.0852}},25);
 }
