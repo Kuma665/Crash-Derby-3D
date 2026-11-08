@@ -611,23 +611,13 @@ function mst2(s,t){
   if(sec%2===1&&(k===0||k===6||k===10)){const f=329.6*Math.pow(2,LD[((bar<<2)+(k>>2))%8]/12);for(const ty of['sawtooth']){const o=AC.createOscillator(),e=AC.createGain();o.type=ty;o.frequency.value=f*(ty==='square'?2:1);e.gain.setValueAtTime(.07,t);e.gain.exponentialRampToValueAtTime(.001,t+.3);o.connect(e);e.connect(ds);e.connect(rv);o.start(t);o.stop(t+.32)}}
 }
 function mmenu(s,t){
-  /* Menü-/Titelmusik: Rock-Stück in 4 Teilen (Intro, Groove, Refrain mit Lead, Bridge), E-Moll, passend zur Ingame-Musik */
-  const k=s&7,bar=(s>>3)&3,sec=(s>>5)&3,br=sec===3,r=(br?[-4,-2,0,-5]:[0,-4,-2,-5])[bar],mi=r===0,th=mi?3:4,rt=82.4*Math.pow(2,r/12),last=bar===3;
-  if(k===0){const lf=AC.createBiquadFilter();lf.type='lowpass';lf.frequency.value=sec===2?1500:900;lf.connect(mus);lf.connect(rv);
-    for(const m of[1,Math.pow(2,th/12),1.498])for(const dt of[-7,7]){const o=AC.createOscillator(),e=AC.createGain();o.type='sawtooth';o.frequency.value=rt*m*2;o.detune.value=dt;e.gain.setValueAtTime(.001,t);e.gain.linearRampToValueAtTime(sec===0?.05:.035,t+.35);e.gain.linearRampToValueAtTime(.001,t+2.6);o.connect(e);e.connect(lf);o.start(t);o.stop(t+2.7)}
-    }
-  if(sec!==2||k%2===0){const f=164.8*Math.pow(2,([0,7,12,7,th,7,12,th+12][k]+r)/12);tone(t,f,f,.38,sec===2?.035:.055,'sine',mus)}
-  if(sec===1&&k%2===0||sec===2)gt(rt,t,k===0?.45:.09,k===0?.13:sec===2?.075:.065);if(k===0&&sec)gt(rt*1.498,t,.45,.06);
-  if(sec===3&&k===0)gt(rt,t,1.2,.1);
-  if(sec===2){const M=[[7,-1,7,10,12,-1,10,7],[12,-1,8,-1,3,-1,8,12],[14,-1,10,-1,5,-1,10,14],[11,-1,7,-1,11,-1,14,-1]][bar][k];if(M>=0)gt(164.8*Math.pow(2,M/12),t,.42,.09)}
-  const fill=last&&k>=6&&sec!==0;
-  if(sec===0){if(k===0&&bar===0)tone(t,110,40,.3,.4,'sine',mus)}
-  else if(sec===2){if(k%2===0||k===3)tone(t,115,40,.22,.5,'sine',mus)}
-  else if(k===0||k===3)tone(t,110,40,.28,.5,'sine',mus);
-  if(fill){nz(t,.09,1100+(k-6)*250,.8,.24,'bandpass',mus);tone(t,200-(k-6)*50,90,.14,.35,'sine',mus)}
-  else if(sec===2?(k===2||k===6):sec!==0&&k===4){nz(t,.12,1300,.8,.26,'bandpass',mus);tone(t,180,120,.1,.25,'triangle',mus)}
-  
-  
+  /* Menü-/Titelmusik: nur sanfte Töne (Flächen + weiches Arpeggio), 4 ruhige Teile mit wechselnden Akkorden */
+  const k=s&7,bar=(s>>3)&3,sec=(s>>5)&3,R=[[0,-4,-2,-5],[0,-4,-2,-5],[5,-4,3,-2],[-4,-2,0,0]][sec][bar],mi=(sec===2?bar===0:R===0),th=mi?3:4,rt=82.4*Math.pow(2,R/12);
+  if(k===0){const lf=AC.createBiquadFilter();lf.type='lowpass';lf.frequency.value=sec===2?800:650;lf.connect(mus);lf.connect(rv);
+    for(const m of[1,Math.pow(2,th/12),1.498])for(const dt of[-8,8]){const o=AC.createOscillator(),e=AC.createGain();o.type='sawtooth';o.frequency.value=rt*m;o.detune.value=dt;e.gain.setValueAtTime(.001,t);e.gain.linearRampToValueAtTime(.065,t+.9);e.gain.linearRampToValueAtTime(.001,t+2.7);o.connect(e);e.connect(lf);o.start(t);o.stop(t+2.8)}}
+  const P=sec===1?[12+th,12,7,th,12,7,th,0]:[0,7,12,7,th,7,12,12+th];
+  if(sec!==3||k%2===0){const f=rt*2*Math.pow(2,P[k]/12);tone(t,f,f,.45,sec===3?.06:.075,'triangle',mus);tone(t,f,f,.7,.04,'sine',rv)}
+  if(sec===1||sec===2){if(k===0||k===4)tone(t,rt/2,rt/2,.9,.12,'sine',mus)}
 }
 function riser(t){
   const s=AC.createBufferSource(),f=AC.createBiquadFilter(),e=AC.createGain(),o=AC.createOscillator(),g=AC.createGain();
