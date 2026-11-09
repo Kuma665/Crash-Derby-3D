@@ -193,6 +193,7 @@ h1{font-size:15px}.bar{height:20px}.bx::before{font-size:11px;top:1px}#al{font-s
 #ov .pf button{width:28px;height:28px;padding:0;font-size:13px;text-transform:none;letter-spacing:0;border-radius:50%;flex:0 0 auto}
 #ov .pf button.rd{width:100%;height:auto;padding:7px;border-radius:9px;font-size:14px;letter-spacing:1px;flex:1 1 auto}
 #ov .pf button.gb{width:auto;height:auto;align-self:stretch;padding:0 9px;border-radius:9px;font-size:16px}
+#ov .pf button.rd.sel{box-shadow:0 0 14px rgba(255,207,61,.95);outline:2px solid #fff}
 #ov .pf button.gb.sel{background:#ffcf3d;color:#222;box-shadow:0 0 12px rgba(255,207,61,.9);outline:2px solid #fff}
 #ov .pc.rdy .rd{background:linear-gradient(#7ee07e,#2f9e44);color:#05260d;box-shadow:0 4px 0 #1b6a2d}
 .ttr{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.ttr h2{margin:0}
@@ -304,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09g</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09h</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09g"></script>
+<script src="musik.js?v=2026-11-09h"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1290,7 +1291,7 @@ return `<div class="pc${PK.r[i]?' rdy':''}" style="--pc:${hex(s.c)}"><div class=
 `<div class="pf${f===0?' on':''}">${ar(0,-1,'◀')}<span><b>${v.n}</b></span>${ar(0,1,'▶')}</div><div class="pd">${v.d}</div><div class="st">${stBars(v)}</div>`+
 `<div class="pf${f===1?' on':''}">${ar(1,-1,'◀')}<i class="sw" style="background:${hex(s.c)}"></i>${ar(1,1,'▶')}</div>`+
 `<div class="pf${f===2?' on':''}">${ar(2,-1,'◀')}<i class="sw" style="background:${hex(s.c2)}"></i>${ar(2,1,'▶')}</div>`+
-`${(!RACE&&DM===1)?`<div class="pf${f===4?' on':''}">${ar(4,-1,'◀')}<span><b>${['Team: Auto','🔴 Team Rot','🔵 Team Blau'][s.tm|0]}</b></span>${ar(4,1,'▶')}</div>`:''}<div class="pf${f===3?' on':''}"><button class="gb${f===9?' sel':''}" data-pa="${i}:9:0" title="Garage">🔧</button><button class="rd" data-pa="${i}:3:0">${PK.r[i]?'✔ Bereit':'Bereit?'}</button></div></div>`)}).join('')}
+`${(!RACE&&DM===1)?`<div class="pf${f===4?' on':''}">${ar(4,-1,'◀')}<span><b>${['Team: Auto','🔴 Team Rot','🔵 Team Blau'][s.tm|0]}</b></span>${ar(4,1,'▶')}</div>`:''}<div class="pf"><button class="gb${f===9?' sel':''}" data-pa="${i}:9:0" title="Garage">🔧</button><button class="rd${f===3?' sel':''}" data-pa="${i}:3:0">${PK.r[i]?'✔ Bereit':'Bereit?'}</button></div></div>`)}).join('')}
 function startPick(){PK={n:NPS||cl(gps().length,1,4),f:[0,0,0,0],r:[0,0,0,0],g:[0,0,0,0],go:0};for(let i=0;i<4;i++){pkPrev[i]={a:true,b:true,s:true};pkRep[i]={}}pkRender();go('pick')}
 function pkAct(i,f,d){if(i>=PK.n||SCR!=='pick')return;PK.f[i]=f;if(f===3)PK.r[i]=PK.r[i]?0:1;else if(!PK.r[i]){const s=SEL[i];if(f===9){PK.g[i]=1;PK.f[i]=5}else if(f===8){PK.g[i]=0;PK.f[i]=9}else if(f>=5&&f<=7){const g=gsOf(i,s.v),j=f-5,lo=j<2?-1:0,nn=[PTN.length,RIMC.length,STK.length][j]-lo;g[j]=((g[j]-lo+d)%nn+nn)%nn+lo}else if(f===4){s.tm=((s.tm|0)+d+3)%3}else if(f===0){s.v=(s.v+d+VT.length)%VT.length;$('sv'+i).value=s.v}else{const k=f===1?'c':'c2',x=PAL.indexOf(s[k]);s[k]=PAL[((x<0?0:x)+d+PAL.length)%PAL.length];$((f===1?'sc':'sd')+i).value=hex(s[k])}saveSel()}pkRender();pkCheck()}
 function pkCheck(){if(PK.go||!PK.r.slice(0,PK.n).every(Boolean))return;PK.go=1;setTimeout(()=>{if(SCR==='pick'&&!OV.hidden&&PK.r.slice(0,PK.n).every(Boolean))init(PK.n);else PK.go=0},450)}
