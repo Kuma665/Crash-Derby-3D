@@ -305,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09zc</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09zd</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09zc"></script>
+<script src="musik.js?v=2026-11-09zd"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -367,7 +367,11 @@ const S=new THREE.Scene();S.autoUpdate=false;S.background=new THREE.Color(0x8fb3
 const cam=new THREE.PerspectiveCamera(65,4/3,1,3000);
 const amb=new THREE.AmbientLight(0xffffff,.7);S.add(amb);const hemi=new THREE.HemisphereLight(0xcfe4ff,0x6b5a40,.3);S.add(hemi);const fill=new THREE.DirectionalLight(0x9ab8ff,.18);fill.position.set(-150,120,-100);S.add(fill);
 const sun=new THREE.DirectionalLight(0xfff0d0,.8);sun.position.set(120,250,80);S.add(sun);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0004;{const sc=sun.shadow.camera;sc.left=sc.bottom=-1100;sc.right=sc.top=1100;sc.near=10;sc.far=1800}
-const tex=(w,h,fn)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);return new THREE.CanvasTexture(c)};
+/* Texturen werden je Grafikstufe schärfer gezeichnet (Hoch x4, Mittel/Auto x2, Niedrig x1); TXS = Liste zum Neuzeichnen beim Umschalten */
+const TXQ=()=>{const q=TUNE.q===undefined?2:TUNE.q|0;return q===0?1:q===1?2:q===2?4:2},TXS=[],GDS={value:0};let TXK=TXQ();
+function txDraw(o){const k=Math.max(1,Math.min(TXK,Math.floor(2048/Math.max(o.w,o.h))));o.c.width=o.w*k;o.c.height=o.h*k;const g=o.c.getContext('2d');g.setTransform(k,0,0,k,0,0);o.fn(g,o.w,o.h);o.t.anisotropy=Math.min(R.capabilities.getMaxAnisotropy(),TXK>2?8:TXK>1?4:1);o.t.needsUpdate=true}
+function txApply(){const k=TXQ();GDS.value=k>2?.55:k>1?.45:0;if(k===TXK)return;TXK=k;TXS.forEach(txDraw)}
+const tex=(w,h,fn)=>{const c=document.createElement('canvas'),t=new THREE.CanvasTexture(c),o={c,w,h,fn,t};TXS.push(o);txDraw(o);t.addEventListener('dispose',()=>{const i=TXS.indexOf(o);if(i>=0)TXS.splice(i,1)});return t};
 const GC=document.createElement('canvas');GC.width=GC.height=1024;const gx=GC.getContext('2d'),SC=1024/W,gtex=new THREE.CanvasTexture(GC);gtex.anisotropy=R.capabilities.getMaxAnisotropy();let gdirty=0,gf=0;
 function drawGround2(){gx.setLineDash([]);gx.fillStyle='#4d4d4a';gx.fillRect(0,0,1024,1024);gx.save();gx.beginPath();gx.ellipse(512,512,AX*SC,BY*SC,0,0,7);gx.clip();gx.fillStyle='#b59c64';gx.fillRect(0,0,1024,1024);
   for(let i=0;i<320;i++){const x=Math.random()*1024,y=Math.random()*1024,r=15+Math.random()*60,gr=gx.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,Math.random()<.5?'rgba(90,66,36,.3)':'rgba(235,215,160,.28)');gr.addColorStop(1,'rgba(0,0,0,0)');gx.fillStyle=gr;gx.fillRect(x-r,y-r,2*r,2*r)}
@@ -381,7 +385,7 @@ function drawGround(){if(MAP===1){drawGround2();return}if(MAP>=2){const sc=1024/
   if(RACE)drawRaceGround();else{gx.strokeStyle='rgba(230,170,0,.35)';gx.lineWidth=5;gx.setLineDash([30,24]);gx.beginPath();gx.arc(512,512,330,0,7);gx.stroke();gx.beginPath();gx.arc(512,512,90,0,7);gx.stroke();gx.setLineDash([])}
   gx.strokeStyle='rgba(20,12,6,.35)';gx.lineWidth=1.6;gtex.needsUpdate=true;gdirty=0}
 drawGround();gtex.anisotropy=4;
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(W,W,64,64),new THREE.MeshLambertMaterial({map:gtex}));
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(W,W,64,64),new THREE.MeshLambertMaterial({map:gtex}));/* feine Boden-Detailstruktur (gekachelt, scharf aus der Nähe) */{const dt=tex(128,128,(g,w,h)=>{g.fillStyle='#9e9e9e';g.fillRect(0,0,w,h);for(let i=0;i<1400;i++){const v=110+Math.random()*90|0,r=.3+Math.random()*1.1,x=Math.random()*w,y=Math.random()*h;g.fillStyle='rgb('+v+','+v+','+v+')';for(const ox of[-w,0,w])for(const oy of[-h,0,h]){if((ox&&Math.abs(x+ox-w/2)>w/2+r)||(oy&&Math.abs(y+oy-h/2)>h/2+r))continue;g.beginPath();g.arc(x+ox,y+oy,r,0,7);g.fill()}}});dt.wrapS=dt.wrapT=THREE.RepeatWrapping;dt.keep=1;GDS.value=TXK>2?.55:TXK>1?.45:0;ground.material.onBeforeCompile=s=>{s.uniforms.tDet={value:dt};s.uniforms.uDS=GDS;s.fragmentShader='uniform sampler2D tDet;uniform float uDS;\n'+s.fragmentShader.replace('#include <map_fragment>','#include <map_fragment>\n diffuseColor.rgb*=mix(vec3(1.),texture2D(tDet,vUv*48.).rgb*1.6,uDS);')}}
 ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;S.add(ground);
 const rwT=tex(256,16,(g,w,h)=>{for(let i=0;i<16;i++){g.fillStyle=i%2?'#e8e8e8':'#c23b22';g.fillRect(i*16,0,16,h)}});rwT.wrapS=THREE.RepeatWrapping;rwT.repeat.set(24,1);
 /* Turbo-Felder im Rennen: 3 Pfeilfelder pro Strecke, ein InstancedMesh */
@@ -475,7 +479,7 @@ snG.setAttribute('position',new THREE.BufferAttribute(snA,3));
 const sand=new THREE.Points(snG,new THREE.PointsMaterial({color:0xe0b878,size:3,transparent:true,opacity:.55,fog:false}));sand.frustumCulled=false;sand.visible=false;S.add(sand);
 function sandStep(){const a=snG.attributes.position.array;for(let i=0;i<SN*3;i+=3){a[i]+=4;a[i+1]+=(Math.random()-.5)*.6;if(a[i]>250)a[i]=-250}snG.attributes.position.needsUpdate=true}
 const CMS=[0,0,0,0];const ARS=[],av=new THREE.Vector3(),av2=new THREE.Vector3(),rb=[];
-function camToggle(i){if(i>=NP)return;CMS[i]=(CMS[i]+1)%4;}
+function camToggle(i){if(i>=NP)return;pzR=1;CMS[i]=(CMS[i]+1)%4;}
 function rumble(i,m){if(state==='idle')return;const vb=TUNE.vib;if(!vb)return;const t=performance.now();if(t-(rb[i]||0)<70)return;rb[i]=t;const k=Math.min(1,m/6),k2=k*k,du=Math.min(320,Math.round((18+k2*260)*vb)),sm=Math.min(1,k2*vb*1.1),wm=Math.min(1,(.15+.6*k)*vb);try{if(i===0&&navigator.vibrate)navigator.vibrate(k>.55?[du,25,Math.round(du*.5),25,Math.round(du*.25)]:du)}catch(e){}try{const p=pads[i];if(p&&p.vibrationActuator)p.vibrationActuator.playEffect('dual-rumble',{duration:du,strongMagnitude:sm,weakMagnitude:wm})}catch(e){}}
 function arrow(i,P,vx,vy,vw,vh,H){const e=ARS[i];if(!e)return;let best=null,bd=1e9;for(const c of cars){if(c===P||c.hp<=0||ally(c,P))continue;const d=(c.x-P.x)*(c.x-P.x)+(c.y-P.y)*(c.y-P.y);if(d<bd){bd=d;best=c}}
   if(!best||P.hp<=0||state!=='play'){e.style.display='none';return}
@@ -1195,7 +1199,8 @@ function mmap(){const on=TUNE.mm!==0&&(state==='play'||state==='replay');mmc.sty
   for(const it of ITM){mx.drawImage(ITI[it.t],it.x*s-10,it.y*s-10,20,20)}
   for(const c of cars){if(c.hp>0)continue;mx.fillStyle='#666';mx.fillRect(c.x*s-2,c.y*s-2,4,4)}
   for(const pass of [0,1])for(const c of cars){if(c.hp<=0||(c.hi>=0)!==!!pass)continue;const x=c.x*s,y=c.y*s;mx.fillStyle=GM===1?hex(TCL[c.team]):pass?hex(SEL[c.hi].c):'#ff4d3a';mx.beginPath();mx.arc(x,y,pass?10:8,0,7);mx.fill();if(pass){mx.strokeStyle='#fff';mx.lineWidth=2;mx.stroke()}mx.strokeStyle=pass?'#fff':'#ff4d3a';mx.lineWidth=2;mx.beginPath();mx.moveTo(x,y);mx.lineTo(x+Math.cos(c.a)*(pass?20:15),y+Math.sin(c.a)*(pass?20:15));mx.stroke()}}
-var AQ=2,qCool=0,qBack=240,qUp=-9999,dtMin=16.7;function QQ(){return TUNE.q===undefined?2:TUNE.q===3?AQ:TUNE.q|0}function qApply(){PQ=NP>2?[.08,.12,.2][QQ()]:NP>1?.75:1;resize()}var RSC=1,dtA=16.7,rsCool=0,renderAcc=0,renderLast=0;function resize(){const caps=NP>3?[.8,1,1.2]:NP>2?[1,1.2,1.4]:[1.5,2,2];R.setPixelRatio(Math.min(caps[cl(QQ(),0,2)],devicePixelRatio||1)*(NP>1?RSC:1));R.setSize(cv.clientWidth,cv.clientHeight,false)}
+var AQ=2,qCool=0,qBack=240,qUp=-9999,dtMin=16.7;function QQ(){return TUNE.q===undefined?2:TUNE.q===3?AQ:TUNE.q|0}function qApply(){PQ=NP>2?[.08,.12,.2][QQ()]:NP>1?.75:1;resize()}var RSC=1,dtA=16.7,rsCool=0,renderAcc=0,renderLast=0;var pzR=1;/* Pause: Standbild, nur bei Änderungen einmal neu zeichnen */addEventListener('change',()=>pzR=1,true);addEventListener('input',()=>pzR=1,true);document.addEventListener('visibilitychange',()=>pzR=1);addEventListener('focus',()=>pzR=1);
+function resize(){pzR=1;const caps=NP>3?[.8,1,1.2]:NP>2?[1,1.2,1.4]:[1.5,2,2];R.setPixelRatio(Math.min(caps[cl(QQ(),0,2)],devicePixelRatio||1)*(NP>1?RSC:1));R.setSize(cv.clientWidth,cv.clientHeight,false)}
 addEventListener('resize',resize);addEventListener('orientationchange',()=>setTimeout(resize,300));document.addEventListener('fullscreenchange',()=>setTimeout(resize,150));if(window.ResizeObserver)new ResizeObserver(resize).observe(cv);
 let last=0,acc=0,ts=1,camT=0,pOp=false,pC=false,pLB=false,pRB=false,pCs=[]
 /* Interpolation: Physik läuft mit 60 Hz; auf 90/120/144-Hz-Bildschirmen werden Autos zwischen zwei Physikschritten weich überblendet */
@@ -1205,7 +1210,7 @@ function loop(t){camT++;if(state==='play'&&!cdT){const dt=t-last;if(dt>2&&dt<60)
   try{pads=gps()}catch(e){pads=[]}
   const op=pads.some(p=>p.buttons[9]&&p.buttons[9].pressed);if(op&&!pOp&&!TTL){if(state==='replay')rpI=1e9;else if(state==='play'||state==='paused')togglePause();else if(SCR!=='pick')init(cl(pads.length,1,4))}pOp=op;{const lb=pads.some(p=>p.buttons[4]&&p.buttons[4].pressed),rb2=pads.some(p=>p.buttons[5]&&p.buttons[5].pressed);if(state!=='play'&&state!=='paused'&&state!=='replay'){}pLB=lb;pRB=rb2}LB.fill(0);pads.forEach((p,i)=>{if(p.buttons[5]&&p.buttons[5].pressed)LB[i]=1});if(keys.e)LB[0]=1;pads.forEach((p,i)=>{const c8=(state==='play'||state==='replay')&&[8,12,11].some(b=>p.buttons[b]&&p.buttons[b].pressed);if(c8&&!pCs[i])camToggle(i);pCs[i]=c8});{const mt=pads.some(p=>p.buttons[10]&&p.buttons[10].pressed),fsb=pads.some(p=>p.buttons[11]&&p.buttons[11].pressed);const ig=state==='play'||state==='replay';if(mt&&!pMt&&!ig)$('mu').click();if(fsb&&!pFs&&!ig)$('fs').click();pMt=mt;pFs=fsb}
   while(acc>=16.67){for(const c of cars){c.qx=c.x;c.qy=c.y;c.qz=c.z||0;c.qa=c.a}if(hs>0)hs--;else if(state==='replay')repStep();else if(state==='idle')demoStep();else if(state!=='paused')step();acc-=16.67}
-  engine();let draw=true;if(NP>2){renderAcc+=Math.min(34,t-renderLast);renderLast=t;draw=renderAcc>=1000/60;if(draw)renderAcc=Math.min(renderAcc-1000/60,1000/60)}else{renderAcc=0;renderLast=t}if(draw){ipOn(Math.min(1,acc/16.67));try{render()}finally{ipOff()}}requestAnimationFrame(loop)}
+  engine();let draw=true;if(NP>2){renderAcc+=Math.min(34,t-renderLast);renderLast=t;draw=renderAcc>=1000/60;if(draw)renderAcc=Math.min(renderAcc-1000/60,1000/60)}else{renderAcc=0;renderLast=t}if(state==='paused'&&!pzR)draw=false;if(draw){pzR=0;ipOn(Math.min(1,acc/16.67));try{render()}finally{ipOff()}}requestAnimationFrame(loop)}
 init(1);state='idle';$('ov').hidden=false;
 requestAnimationFrame(t=>{last=t;renderLast=t;loop(t)});
 [1,2,3,4].forEach(n=>$('g'+n).onclick=()=>{NPS=n;markG()});
@@ -1222,7 +1227,7 @@ $('cb').onclick=()=>camToggle(0);[0,1,2,3].forEach(()=>{const e=document.createE
 $('mb').onclick=()=>{TUNE.mm=TUNE.mm===0?1:0;$('t11').checked=TUNE.mm!==0;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}};
 {const e=$('t13'),ap=()=>document.documentElement.style.setProperty('--mm',Math.round((matchMedia('(pointer:coarse)').matches?96:130)*(TUNE.ms||1))+'px');if(TUNE.ms===undefined)TUNE.ms=1;e.value=TUNE.ms;$('v13').textContent=Math.round(TUNE.ms*100)+'%';ap();e.oninput=()=>{TUNE.ms=+e.value;$('v13').textContent=Math.round(TUNE.ms*100)+'%';ap();try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}}
 {const e=$('taa');e.checked=TUNE.aa!==0;e.onchange=()=>{TUNE.aa=e.checked?1:0;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}location.reload()}}
-{const e=$('tq');e.value=TUNE.q===undefined?2:TUNE.q|0;e.onchange=()=>{TUNE.q=+e.value;if(TUNE.q===3){AQ=2;qCool=240}try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}PQ=NP>2?[.08,.12,.2][QQ()]:NP>1?.75:1;sun.castShadow=NP<3&&TUNE.sh!==0&&(TUNE.q===3||QQ()>0);RSC=1;resize()}}
+{const e=$('tq');e.value=TUNE.q===undefined?2:TUNE.q|0;e.onchange=()=>{TUNE.q=+e.value;txApply();if(TUNE.q===3){AQ=2;qCool=240}try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}PQ=NP>2?[.08,.12,.2][QQ()]:NP>1?.75:1;sun.castShadow=NP<3&&TUNE.sh!==0&&(TUNE.q===3||QQ()>0);RSC=1;resize()}}
 {const e=$('tsh');e.checked=TUNE.sh!==0;e.onchange=()=>{TUNE.sh=e.checked?1:0;sun.castShadow=NP<3&&TUNE.sh!==0&&QQ()>0;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}}
 {const e=$('t11');e.checked=TUNE.mm!==0;e.onchange=()=>{TUNE.mm=e.checked?1:0;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}}
 {const e=$('t10');e.value=TUNE.vib;$('v10').textContent=Math.round(TUNE.vib*100)+'%';e.oninput=()=>{TUNE.vib=+e.value;$('v10').textContent=Math.round(TUNE.vib*100)+'%';rumble(0,6);try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}}
