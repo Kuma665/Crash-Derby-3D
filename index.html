@@ -305,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09x</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09y</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09x"></script>
+<script src="musik.js?v=2026-11-09y"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -743,7 +743,7 @@ function stepParticles(){
   n=0;
   for(const p of pxs){p.x+=p.vx;p.y+=p.vy;p.h+=p.vh;p.vh-=p.g;p.l--;if(p.h<1){p.h=1;p.vh*=-.3}if(p.l>0)pxs[n++]=p;else S.remove(p.m)}pxs.length=n;
 }
-function wallHit(c,nx,ny){const vn=c.vx*nx+c.vy*ny;{const vt0=-c.vx*ny+c.vy*nx;if(Math.abs(vt0)>2.5&&vn<.5&&((c.spk=(c.spk|0)+1)%3===0)){spark(c.x-nx*c.r,c.y-ny*c.r,2);if(c.hi>=0)sndScrape(Math.abs(vt0))}}if(vn>=0)return;const imp=-vn;hurt(c,imp*1.6);if(imp>1)spark(c.x,c.y,4);if(imp>1.5)fx(c.x,c.y,6,0,0,.1,22,'d',10);const vt=-c.vx*ny+c.vy*nx;c.vx-=1.4*vn*nx+(-ny)*vt*.12;c.vy-=1.4*vn*ny+nx*vt*.12;const cr=Math.cos(c.a)*ny-Math.sin(c.a)*nx;c.w=cl(c.w+cr*imp*.01/c.m,-.12,.12)}
+function wallHit(c,nx,ny){const vn=c.vx*nx+c.vy*ny;{const vt0=-c.vx*ny+c.vy*nx;if(Math.abs(vt0)>2.5&&vn<.5&&((c.spk=(c.spk|0)+1)%3===0)){spark(c.x-nx*c.r,c.y-ny*c.r,2);if(c.hi>=0)sndScrape(Math.abs(vt0))}}if(vn>=0)return;const imp=-vn;if(imp>1)hurt(c,imp*1.6);if(imp>1)spark(c.x,c.y,4);if(imp>1.5)fx(c.x,c.y,6,0,0,.1,22,'d',10);const vt=-c.vx*ny+c.vy*nx;c.vx-=1.4*vn*nx+(-ny)*vt*.12;c.vy-=1.4*vn*ny+nx*vt*.12;const cr=Math.cos(c.a)*ny-Math.sin(c.a)*nx;c.w=cl(c.w+cr*imp*.01/c.m,-.12,.12)}
 const spin=(c,nx,ny,j)=>{const ca=Math.cos(c.a),sa=Math.sin(c.a),u=nx*ca+ny*sa,v=-nx*sa+ny*ca,lx=cl(u*30,-16,16),ly=cl(v*30,-9,9),px=lx*ca-ly*sa,py=lx*sa+ly*ca;c.w=cl(c.w-(px*ny-py*nx)*j*.0028/c.m,-.12,.12)};
 let lastK=null,hs=0,kick=0;
 function ally(a,b){return(GM===1||GM===2)&&a!==b&&a.team===b.team}
