@@ -305,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09m</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09n</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09m"></script>
+<script src="musik.js?v=2026-11-09n"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -577,7 +577,7 @@ function mkCar(c,human,num,V,c2,cs){
     gls=[G(.8,Math.hypot(fT,ch)*.74,11-sT,5-fT/2+.35*Math.cos(ga),9+ch/2+.35*Math.sin(ga),0,0,ga),G(.8,Math.hypot(rT,ch)*.74,11-sT,-9+rT/2-.35*Math.cos(gb),9+ch/2+.35*Math.sin(gb),0,0,-gb),G(sw,ch*.5,.6,sx,9+ch/2+.4,sz,-gc,0),G(sw,ch*.5,.6,sx,9+ch/2+.4,-sz,gc,0)];
   if(K<2){px(3,1,16,-16,14,0,dk);px(1,4,1,-16,11,-6,dk);px(1,4,1,-16,11,6,dk)}const ex=px(6,1.8,1.8,-18.5,3,5,dk);
   const wh=new THREE.MeshLambertMaterial({color:0xf2f2f2}),yl=new THREE.MeshBasicMaterial({color:0xffd34d});
-  const rimM=new THREE.MeshPhongMaterial({color:0xc9ced4,map:RIMT,shininess:90,specular:0xffffff,envMap:SKYENV,reflectivity:.5});rimM.color.set([0xc9ced4,0x1e1e1e,0xd4a72c,0xc9ced4,0x3a3d33,0x2a2a2a,0xe8e8e8,0x1e1e1e][K]||0xc9ced4);if(cs&&cs[1]>=0)rimM.color.set(RIMC[cs[1]][0]);ws.forEach(w=>w.add(new THREE.Mesh(RIMG,rimM)));
+  const rimM=new THREE.MeshPhongMaterial({color:0xc9ced4,map:RIMT,shininess:90,specular:0xffffff,envMap:SKYENV,reflectivity:.5});rimM.color.set([0xc9ced4,0x1e1e1e,0xd4a72c,0xc9ced4,0x3a3d33,0x2a2a2a,0xe8e8e8,0x1e1e1e][K]||0xc9ced4);if(cs&&cs[1]>=0)rimM.color.set(RIMC[cs[1]][0]);ws.forEach(w=>w.add(new THREE.Mesh(RIMG,rimM)));if(K===3||K===7)ws.forEach(w=>w.castShadow=true);
   [-9.8,9.8].forEach(z=>{mr.push(px(1.5,1.2,2.2,4.5,11,z,dk));px(1.6,.5,.3,-2,8,z*1.04,wh)});
   const gri=px(.6,2.6,11,16.8,5,0,dk);px(.4,1.8,5,16.95,3,0,wh);px(.4,1.8,5,-16.95,4.5,0,wh);px(.3,7,.3,-7.8+rT,9+ch+4.5,5.5-sT*.8,dk);
   const fe=[[11,-9.2],[11,9.2],[-11,-9.2],[-11,9.2]].map(([x,z])=>pb(10,5,1.6,x,6,z));px(9,3,10,10.5,6.2,0,new THREE.MeshLambertMaterial({color:0x55595e}));px(3,1.5,3,12,8,0,dk);
