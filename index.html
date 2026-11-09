@@ -305,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09l</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09m</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09l"></script>
+<script src="musik.js?v=2026-11-09m"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -764,7 +764,7 @@ function detach(c,side,q){
   spark(c.x,c.y,6);sndClang();
 }
 function hurt(c,d,side){
-  if(c.hp<=0)return;if(!side)sndScrape(d);side=side||SD[Math.random()*4|0];if(c.sh>0)c.shf=6;d*=.38*TUNE.dmg*(c.sh>0?.2:1)*(c.rg>0?.8:1);if(c.hi>=0)rumble(c.hi,d);
+  if(c.hp<=0)return;if(!side)sndScrape(d);side=side||SD[Math.random()*4|0];if(c.sh>0){c.shf=6;c.shs=side}d*=.38*TUNE.dmg*(c.sh>0?.2:1)*(c.rg>0?.8:1);if(c.hi>=0)rumble(c.hi,d);
   c.hp=Math.max(0,c.hp-d);ulCh(c,d);c.dn[side]=Math.min(1,c.dn[side]+d/30);{const L=c.o.cand[side].filter(p=>p.parent===c.o.grp);if(L.length){const p=L[Math.random()*L.length|0];p.d=(p.d||0)+d/6*(p.t||1);if(c.o.ws.includes(p)&&!p.fl&&p.d>.35){p.fl=1;sndBang();spark(c.x,c.y,8)}if(p.d>=1)detach(c,side,p);else if(p.d>.5&&!p.hg){p.hg=1;sndClang();spark(c.x,c.y,4)}}}
   if(c.hp===0){kill(c);sndBoom();spark(c.x,c.y,30);for(let i=0;i<10;i++){const a=Math.random()*6.28,s=Math.random()*2.2;fx(c.x,c.y,8,Math.cos(a)*s,Math.sin(a)*s,.3+Math.random()*1.2,30+Math.random()*20|0,'f',16)}for(let i=0;i<8;i++)fx(c.x+(Math.random()-.5)*12,c.y+(Math.random()-.5)*12,10,(Math.random()-.5)*.8,(Math.random()-.5)*.8,.5+Math.random(),60,'k',16);fx(c.x,c.y,10,0,0,0,10,'f',26);if(c.hi>=0)shake=10;for(let i=0;i<3;i++)detach(c,SD[Math.random()*4|0])}
 }
@@ -800,9 +800,14 @@ function HPclr(){HPS.forEach(p=>{S.remove(p.s);p.m.dispose()});HPS=[]}
 function ring(x,y,z,r1,r2,col,life,op){if(NP>2)return;const m=new THREE.Mesh(new THREE.RingGeometry(.84,1,48),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,fog:false}));m.rotation.x=-Math.PI/2;m.position.set(x-W/2,(z||0)+4,y-W/2);m.scale.set(r1,r1,r1);S.add(m);const q={m,l:life,l0:life,r1,r2,op};rings.push(q);return q}
 function stepRings(){stepHP();for(const r of rings){r.l--;if(r.f)r.m.position.set(r.f.x-W/2,(r.f.z||0)+4,r.f.y-W/2);const t=1-r.l/r.l0,e=1-Math.pow(1-t,2),s=r.r1+(r.r2-r.r1)*e;r.m.scale.set(s,s,s);r.m.material.opacity=r.op*(1-t)}rings=rings.filter(r=>{if(r.l>0)return true;S.remove(r.m);r.m.geometry.dispose();r.m.material.dispose();return false})}
 function clearAb(){HPclr();shells.forEach(s=>S.remove(s.m));shells=[];rings.forEach(r=>{S.remove(r.m);r.m.geometry.dispose();r.m.material.dispose()});rings=[]}
+/* Schild-Optik: ein Mesh mit Shader – heller Rand (Fresnel), Wabenmuster, Lichtband, Trefferwelle von der getroffenen Seite */
+const SHDIR={f:[1,0,0],b:[-1,0,0],l:[0,0,-1],r:[0,0,1]};
 function shieldFx(c){
-  const o=c.o;if(!o.shm){const m=new THREE.Mesh(new THREE.SphereGeometry(1,28,18),new THREE.MeshBasicMaterial({color:0x2a8cff,transparent:true,opacity:.14,blending:THREE.AdditiveBlending,depthWrite:false}));m.scale.set(27,16,19);m.position.y=9;m.add(new THREE.Mesh(new THREE.SphereGeometry(1.05,28,18),new THREE.MeshBasicMaterial({color:0x5ab8ff,side:THREE.BackSide,transparent:true,opacity:.12,blending:THREE.AdditiveBlending,depthWrite:false})));o.grp.add(m);o.shm=m}
-  const m=o.shm;m.visible=true;if(c.shf>0)c.shf--;m.rotation.y+=.03;{const p=1+.04*Math.sin(camT*.2);m.scale.set(27*p,16*p,19*p)}m.material.opacity=c.sh<45?(Math.floor(c.sh/4)%2?.03:.14):.11+.04*Math.sin(camT*.3);m.children[0].material.opacity=c.sh<45?(Math.floor(c.sh/4)%2?.03:.12):.1;if(c.shf>0){m.material.opacity=.45;m.children[0].material.opacity=.4;const q=1.12;m.scale.set(27*q,16*q,19*q)}
+  const o=c.o;if(!o.shm){const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,20),new THREE.ShaderMaterial({uniforms:{uT:{value:0},uO:{value:1},uHT:{value:1},uHD:{value:new THREE.Vector3(1,0,0)},uC:{value:new THREE.Color(0x3aa0ff)}},transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide,
+    vertexShader:'varying vec3 vN,vV,vP;varying vec2 vU;void main(){vU=uv;vP=position;vN=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.);vV=-mv.xyz;gl_Position=projectionMatrix*mv;}',
+    fragmentShader:'uniform float uT,uO,uHT;uniform vec3 uHD,uC;varying vec3 vN,vV,vP;varying vec2 vU;float hx(vec2 p){p=abs(p);return max(dot(p,vec2(.5,.866)),p.x);}void main(){float fr=pow(1.-abs(dot(normalize(vN),normalize(vV))),2.2);vec2 p=vU*vec2(28.,9.)*vec2(1.,1.732);vec2 r=vec2(1.,1.732),h=r*.5,a=mod(p,r)-h,b=mod(p-h,r)-h,g=dot(a,a)<dot(b,b)?a:b;float e=smoothstep(.40,.48,hx(g));float bd=smoothstep(.85,1.,sin(vP.y*5.-uT*.12))*.5;float an=acos(clamp(dot(normalize(vP),uHD),-1.,1.));float rp=smoothstep(.22,0.,abs(an-uHT*2.6))*(1.-uHT);float al=(.03+fr*.75+e*(.10+fr*.4+bd)+rp*(.45+e*.6))*uO;gl_FragColor=vec4(uC+vec3(.35)*(rp+fr*.3),min(al,1.));}'}));
+    m.scale.set(27,16,19);m.position.y=9;o.grp.add(m);o.shm=m}
+  const m=o.shm,U=m.material.uniforms;m.visible=true;if(c.shf===6&&SHDIR[c.shs]){U.uHD.value.fromArray(SHDIR[c.shs]);U.uHT.value=0}if(c.shf>0)c.shf--;U.uHT.value=Math.min(1,U.uHT.value+1/26);U.uT.value=camT;U.uO.value=c.sh<45?(Math.floor(c.sh/4)%2?.25:1):1;{const p=1+.03*Math.sin(camT*.2)+(1-U.uHT.value)*.05;m.scale.set(27*p,16*p,19*p)}
 }
 function ramFx(c){const ca=Math.cos(c.a),sa=Math.sin(c.a),x=c.x-ca*20,y=c.y-sa*20;for(let i=0;i<2;i++)fx(x+(Math.random()-.5)*8,y+(Math.random()-.5)*8,6,-ca*1.2,-sa*1.2,.1,16,'f',34+Math.random()*14);fx(x,y,6,0,0,0,5,'n',40);if(Math.random()<.6)pxl(x,y,6,-ca*3+(Math.random()-.5)*2,-sa*3+(Math.random()-.5)*2,.4,18,fiM,2,.05)}
 function dashFx(c){fx(c.x,c.y,7,0,0,0,9,'n',34);fx(c.x,c.y,7,0,0,0,6,'n',18);pxl(c.x,c.y,7,-c.vx*.2,-c.vy*.2,.2,14,whM,2,0)}
