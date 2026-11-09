@@ -305,11 +305,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09w</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-09x</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-09w"></script>
+<script src="musik.js?v=2026-11-09x"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -729,7 +729,7 @@ function fx(x,y,h,vx,vy,vh,l,k,sz){if(fxs.length>(k==='k'||k==='d'?90:200)*PQ)re
 function spark(x,y,n){for(let i=0;i<n;i++){const a=Math.random()*6.28,s=(.5+Math.random()*2.5)*1.5;
   add(x,y,6,Math.cos(a)*s,Math.sin(a)*s,1+Math.random()*2,20,spM)}}
 function add(x,y,h,vx,vy,vh,l,mat){
-  if(mat===spM){const r=Math.random();pxl(x,y,h,vx,vy,vh,l,r<.5?spM:r<.8?fiM:whM,1.6+Math.random()*1.6,.15);return}
+  if(mat===spM){const r=Math.random();pxl(x,y,h,vx*1.15,vy*1.15,vh,l*.8,r<.45?whM:r<.85?spM:fiM,.8+Math.random()*.8,.18);return}
   if(mat===smM){fx(x,y,h,vx,vy,vh+.1,l+10,'k',14);return}
   if(mat===dsM){fx(x,y,h,vx,vy,vh,l,'d',11);return}
   if(mat===gsM){pxl(x,y,h,vx,vy,vh,l,gsM,1.6,.15);return}
@@ -1069,7 +1069,7 @@ function step(){
     if(c.hp<c.hm*.55&&Math.random()<dm*.5)add(c.x,c.y,12,(Math.random()-.5)*.3,(Math.random()-.5)*.3,.6,45,smM);
     if(c.hp<c.hm*.28){const R=Math.random,fp=()=>[c.x+(R()-.5)*10,c.y+(R()-.5)*8];let q=fp();if(R()<.5)fx(q[0],q[1],9,0,0,.6,24,'f',11);if(R()<.25){q=fp();fx(q[0],q[1],9,0,0,.4,20,'f',8)}if(R()<.2){q=fp();pxl(q[0],q[1],9,(R()-.5)*.5,(R()-.5)*.5,.8+R()*1.2,30+R()*20|0,R()<.5?fiM:spM,.9,.03)}if(R()<.2)add(c.x,c.y,16,0,0,.7,50,smM)}
     if(c.hp>0){const o=c.o,sp=Math.hypot(c.vx,c.vy),nf=o.ws.filter(w=>w.fl&&w.parent===o.grp).length;if(nf&&sp>1){c.w+=(Math.random()-.5)*.003*nf;c.vx*=1-.004*nf;c.vy*=1-.004*nf;if(Math.random()<.3)add(c.x+ca2*10,c.y+sa2*10,2,0,0,.5,10,spM)}
-    /* Funken an nackten Felgen (Rad ab), Menge über PQ */if(o.hub&&sp>1.2&&!c.air){const gs=o.grp.scale;for(const r of o.hub)if(Math.random()<.16*Math.max(PQ,.3)){const lx=r.position.x*gs.x,lz=r.position.z*gs.z;add(c.x+lx*ca2-lz*sa2,c.y+lx*sa2+lz*ca2,1,(Math.random()-.5)*.6-c.vx*.25,(Math.random()-.5)*.6-c.vy*.25,.3,5+Math.random()*4,spM)}}if(false){if(c.hp<c.hm*.3){gx.save();gx.fillStyle='rgba(8,6,4,.35)';gx.beginPath();gx.arc((c.x-ca2*8)*SC,(c.y-sa2*8)*SC,1.5+Math.random()*2,0,7);gx.fill();gx.restore();gdirty=1}if(o.trunk.parent!==o.grp||c.hp<c.hm*.3){gx.save();gx.fillStyle='rgba(190,160,50,.35)';gx.beginPath();gx.arc((c.x-ca2*16)*SC,(c.y-sa2*16)*SC,1.5+Math.random()*2,0,7);gx.fill();gx.restore();gdirty=1}}if(c.hp<c.hm*.2&&Math.random()<.12)fx(c.x-ca2*14+(Math.random()-.5)*6,c.y-sa2*14+(Math.random()-.5)*6,3,0,0,.4,30,'f',9);if(o.ex.hg&&o.ex.parent===o.grp&&sp>2&&Math.random()<.4)add(c.x-ca2*19,c.y-sa2*19,1.5,-ca2*.3,-sa2*.3,.6,12,spM);if(o.hood.parent!==o.grp&&Math.random()<.3){const lo=c.hp<c.hm*.4;lo?fx(c.x+ca2*10,c.y+sa2*10,8,(Math.random()-.5)*.3,(Math.random()-.5)*.3,.6,30,'f',11):add(c.x+ca2*10,c.y+sa2*10,8,(Math.random()-.5)*.3,(Math.random()-.5)*.3,.7,40,smM)}}
+    /* Funken an nackten Felgen (Rad ab), Menge über PQ */if(o.hub&&sp>1.2&&!c.air){const gs=o.grp.scale;for(const r of o.hub)if(Math.random()<.16*Math.max(PQ,.3)){const lx=r.position.x*gs.x,lz=r.position.z*gs.z;pxl(c.x+lx*ca2-lz*sa2,c.y+lx*sa2+lz*ca2,1,(Math.random()-.5)*1.4-c.vx*.45,(Math.random()-.5)*1.4-c.vy*.45,.5+Math.random()*.7,5+Math.random()*4,Math.random()<.7?whM:spM,.45+Math.random()*.35,.18)}}if(false){if(c.hp<c.hm*.3){gx.save();gx.fillStyle='rgba(8,6,4,.35)';gx.beginPath();gx.arc((c.x-ca2*8)*SC,(c.y-sa2*8)*SC,1.5+Math.random()*2,0,7);gx.fill();gx.restore();gdirty=1}if(o.trunk.parent!==o.grp||c.hp<c.hm*.3){gx.save();gx.fillStyle='rgba(190,160,50,.35)';gx.beginPath();gx.arc((c.x-ca2*16)*SC,(c.y-sa2*16)*SC,1.5+Math.random()*2,0,7);gx.fill();gx.restore();gdirty=1}}if(c.hp<c.hm*.2&&Math.random()<.12)fx(c.x-ca2*14+(Math.random()-.5)*6,c.y-sa2*14+(Math.random()-.5)*6,3,0,0,.4,30,'f',9);if(o.ex.hg&&o.ex.parent===o.grp&&sp>2&&Math.random()<.4)add(c.x-ca2*19,c.y-sa2*19,1.5,-ca2*.3,-sa2*.3,.6,12,spM);if(o.hood.parent!==o.grp&&Math.random()<.3){const lo=c.hp<c.hm*.4;lo?fx(c.x+ca2*10,c.y+sa2*10,8,(Math.random()-.5)*.3,(Math.random()-.5)*.3,.6,30,'f',11):add(c.x+ca2*10,c.y+sa2*10,8,(Math.random()-.5)*.3,(Math.random()-.5)*.3,.7,40,smM)}}
   }
   for(let i=0;i<cars.length;i++)for(let j=i+1;j<cars.length;j++){
     const A=cars[i],B=cars[j],dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy)||1;
