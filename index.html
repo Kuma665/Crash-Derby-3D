@@ -162,6 +162,7 @@ body.gp .ctl,body.gp .wrap>button,body.gp #nh{display:none!important}
 #ov button.on:not(.tbn){border-color:#ffcf3d;color:#ffd84d;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -2px 0 rgba(0,0,0,.4),0 4px 0 #111316,0 0 14px rgba(255,207,61,.55)}
 #ov button.fx:not(.tbn){background:radial-gradient(circle at calc(100% - 10px) 50%,#fff3c0 0 1.6px,#7a5400 2.6px,transparent 3.2px),radial-gradient(circle at 14px 50%,#fff3c0 0 1.6px,#7a5400 2.6px,transparent 3.2px),repeating-linear-gradient(180deg,rgba(255,255,255,.08) 0 1px,transparent 1px 3px),linear-gradient(180deg,#ffe066 0%,#ffc61a 47%,#eaa800 53%,#ffcb2e 100%);color:#1c1712;text-shadow:0 1px 0 rgba(255,255,255,.35);border-color:#7a5400;border-left-color:#fff}
 #ov button:not(.tbn):active{box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 1px 0 #111316,0 3px 8px rgba(0,0,0,.4)}
+#ov .pf button:not(.tbn){background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),linear-gradient(180deg,#5d636b 0%,#3c4047 47%,#2b2e33 53%,#3e434a 100%);border-left:1px solid #15171a}#ov .pf button.fx:not(.tbn),#ov .pf button.gb.sel{background:linear-gradient(180deg,#ffe066 0%,#ffc61a 47%,#eaa800 53%,#ffcb2e 100%);color:#1c1712;text-shadow:none;border-color:#7a5400}
 #ov button:not(.fx) .qks{color:#c9cfd6}
 #ov details{background:repeating-linear-gradient(180deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),linear-gradient(180deg,rgba(62,66,73,.88),rgba(32,34,38,.92));border:1px solid #15171a;border-left:4px solid #ffcf3d;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 16px rgba(0,0,0,.45)}
 #hw{width:min(560px,94%);text-align:left;font-size:13px;line-height:1.45;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 14px}#hw h3{margin:8px 0 3px;font-size:14px;color:#ffcf3d;letter-spacing:1px}#hw p{margin:2px 0}
@@ -172,6 +173,13 @@ body.gp .ctl,body.gp .wrap>button,body.gp #nh{display:none!important}
 @media (orientation:landscape) and (max-height:520px){#mn button,#bk,#rp{font-size:15px;padding:8px}#mn{gap:6px}}
 #ov h2{background:linear-gradient(#fff3b0,#e0a100 55%,#a86a00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:tp 2.4s ease-in-out infinite}
 @keyframes tp{0%,100%{filter:drop-shadow(0 4px 0 #5a3a00) drop-shadow(0 0 6px rgba(255,170,0,.3))}50%{filter:drop-shadow(0 4px 0 #5a3a00) drop-shadow(0 0 22px rgba(255,170,0,.85))}}
+/* Überschriften im Metall-Look: Untermenüs Chrom mit gelber Linie, Logo poliertes Gelb-Metall */
+#ov h2{background:linear-gradient(180deg,#fff 0%,#e1e6ec 42%,#8a929c 52%,#d0d6dd 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:none;filter:drop-shadow(0 3px 0 #0b0c0e) drop-shadow(0 0 8px rgba(0,0,0,.6))}
+#ov h2::after{content:'';display:block;height:3px;width:70%;margin:.14em auto 0;background:linear-gradient(90deg,transparent,#ffcf3d 20%,#ffcf3d 80%,transparent)}
+#ov[data-s=main] #ot{background:linear-gradient(180deg,#fffbe0 0%,#ffd84d 40%,#efb000 52%,#ffcf3d 100%);-webkit-background-clip:text;background-clip:text;animation:tp2 2.4s ease-in-out infinite}#ov[data-s=main] #ot::after{display:none}
+@keyframes tp2{0%,100%{filter:drop-shadow(0 4px 0 #0b0c0e) drop-shadow(0 0 6px rgba(255,200,40,.25))}50%{filter:drop-shadow(0 4px 0 #0b0c0e) drop-shadow(0 0 20px rgba(255,200,40,.7))}}
+#ttl .tt1,#ttl .tt2{background:linear-gradient(180deg,#fffbe0 0%,#ffd84d 40%,#efb000 52%,#ffcf3d 100%);-webkit-background-clip:text;background-clip:text;animation:ttp2 2.4s ease-in-out infinite}
+@keyframes ttp2{0%,100%{filter:drop-shadow(0 4px 0 #000) drop-shadow(0 0 10px rgba(255,200,40,.3))}50%{filter:drop-shadow(0 4px 0 #000) drop-shadow(0 0 30px rgba(255,200,40,.85))}}
 #ov .row button{display:flex;flex-direction:column;align-items:center;gap:0;padding:10px 6px}
 .pn{font-size:36px;font-weight:900;line-height:1}
 #ov details{border-left:3px solid var(--acc)}
@@ -279,7 +287,7 @@ h1{font-size:23px;letter-spacing:7px}
 .hud.sm .hs b{font-size:27px}
 @media (orientation:landscape) and (max-height:520px){.hud .hs b{font-size:26px}.hud.sm .hs b{font-size:20px}.hud .hs small{font-size:9px;letter-spacing:1px}.hud .hb{height:9px}.hud .hb.nn{height:7px}.hud{width:min(22%,120px)}.hud.sm{width:min(22%,95px)}}
 #ov #ot.lg{display:flex;align-items:center;justify-content:center;gap:.28em;background:none;-webkit-text-fill-color:initial;text-shadow:none;animation:none;filter:none;transform:none;text-transform:none;letter-spacing:0;line-height:1;padding:.08em .1em .12em}
-#ot.lg .l1{padding:.04em .2em .06em .1em;font-weight:900;font-style:italic;letter-spacing:.06em;background:linear-gradient(#fff3b0,#ffcf3d 45%,#ff7a1a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 6px rgba(255,140,30,.3));animation:lgp 2.4s ease-in-out infinite}@keyframes lgp{50%{filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 22px rgba(255,150,30,.9))}}
+#ot.lg .l1{padding:.04em .2em .06em .1em;font-weight:900;font-style:italic;letter-spacing:.06em;background:linear-gradient(180deg,#fffbe0 0%,#ffd84d 40%,#efb000 52%,#ffcf3d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 8px rgba(255,200,40,.35));animation:lgp 2.4s ease-in-out infinite}@keyframes lgp{50%{filter:drop-shadow(0 3px 0 #000) drop-shadow(0 0 22px rgba(255,150,30,.9))}}
 #ot.lg .l3{font-size:.6em;font-weight:900;font-style:italic;letter-spacing:.12em;color:#fff;-webkit-text-fill-color:#fff;background:#c8281e;padding:0 .45em;transform:skewX(-14deg);border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.6)}
 </style></head><body class="p1">
 <header><h1>CRASH DERBY 3D</h1><div class="bar bx"><div id="hp"></div><i class="nt"></i></div><div class="bar bx"><div id="hp2"></div><i class="nt"></i></div><div class="bar bx"><div id="hp3"></div><i class="nt"></i></div><div class="bar bx"><div id="hp4"></div><i class="nt"></i></div><div id="al">Übrig: 5</div></header>
@@ -312,11 +320,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10w</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10x</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10w"></script>
+<script src="musik.js?v=2026-11-10x"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
