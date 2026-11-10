@@ -337,11 +337,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10aj</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ak</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10aj"></script>
+<script src="musik.js?v=2026-11-10ak"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -746,7 +746,7 @@ addEventListener('pointerdown',()=>{if(AC)AC.resume()});
 ['pointerdown','pointerup','touchend','click','keydown'].forEach(n=>addEventListener(n,()=>{try{if(AC&&AC.state!=='running')AC.resume()}catch(e){}},true));
 let nhT;function nhShow(){let d=0;try{d=localStorage.getItem('cdn')}catch(x){}const e=$('nh');e.hidden=!(matchMedia('(pointer:coarse)').matches&&NP===1&&!d);clearTimeout(nhT);if(!e.hidden)nhT=setTimeout(()=>e.hidden=true,15000)}
 function init(n){RDY.forEach(r=>{r.l=0;r.s.visible=false});
-  CMS.fill(0);GM=RACE?0:DM;MT=GM===3?5400:GM===4?7200:0;zInit();frInit();drawGround();CN.forEach(resetCone);audioInit();stp=0;nextT=0;NP=n;PQ=n>2?[.08,.12,.2][QQ()]:n>1?.75:1;sun.castShadow=n<3&&TUNE.sh!==0&&QQ()>0;NC=Math.max(n,TUNE.en+1);document.body.className='p'+n+(n>1?' p2':'');document.querySelectorAll('.bx').forEach((e,i)=>e.style.display=i<n?'block':'none');document.querySelectorAll('.lbl').forEach((e,i)=>e.style.display=n>1&&i<n?'block':'none');resize();
+  CMS.fill(0);GM=RACE?0:DM;MT=GM===3?5400:GM===4?7200:0;zInit();frInit();drawGround();CN.forEach(resetCone);audioInit();stp=0;nextT=0;NP=n;PQ=n>2?[.08,.12,.2][QQ()]:n>1?.75:1;sun.castShadow=n<3&&TUNE.sh!==0&&QQ()>0;NC=Math.max(n,TUNE.en+1);document.body.className='p'+n+(n>1?' p2':'')+(document.body.classList.contains('gp')?' gp':'');document.querySelectorAll('.bx').forEach((e,i)=>e.style.display=i<n?'block':'none');document.querySelectorAll('.lbl').forEach((e,i)=>e.style.display=n>1&&i<n?'block':'none');resize();
   cars.forEach(c=>{S.remove(c.o.grp);disp(c.o.grp)});parts.forEach(p=>S.remove(p.m));deb.forEach(d=>{S.remove(d.m);disp(d.m)});deb=[];
   clearAb();itClear();cars=[];aliveCars.length=0;parts=[];fxs.forEach(rmFx);fxs=[];pxs.forEach(p=>S.remove(p.m));pxs=[];
   const TA=[];if(GM===1){const cap=[Math.ceil(NC/2),Math.floor(NC/2)],cnt=[0,0],pk=()=>cap[0]-cnt[0]>=cap[1]-cnt[1]?0:1;for(let i=0;i<NC;i++){let t;if(i<n){const pf=SEL[i].tm|0;t=pf?pf-1:pk();if(cnt[t]>=cap[t])t=1-t}else t=pk();TA[i]=t;cnt[t]++}}
