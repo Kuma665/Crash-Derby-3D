@@ -65,7 +65,7 @@ canvas{max-height:calc(var(--vh,1vh)*100 - 40px);border-width:2px}
 #ov{padding:8px;gap:6px}#ov h2{font-size:22px}
 }
 /* ===== Schönes Menü ===== */
-#ov{background:radial-gradient(ellipse at 50% 25%,rgba(70,46,16,.9),rgba(12,8,4,.95));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);gap:14px}
+#ov{background:radial-gradient(ellipse at 50% 25%,rgba(52,58,66,.9),rgba(8,9,11,.95));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);gap:14px}
 #ov h2{font-size:44px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);transform:skew(-6deg);text-shadow:0 3px 0 #7a5400,0 8px 20px rgba(0,0,0,.6)}
 #ov small{font-size:13px;line-height:1.5;color:#e9dcc4;opacity:.9}
 #ov button{background:linear-gradient(#ffcf3d,#e0a100);color:#1c1712;border-radius:10px;font-size:16px;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 0 #8a6200,0 8px 16px rgba(0,0,0,.45);transition:transform .08s,box-shadow .08s}
@@ -109,7 +109,7 @@ canvas{border-color:#0b0805;box-shadow:0 0 0 2px var(--acc),0 12px 32px rgba(0,0
 .ctl button{border-radius:50%;background:rgba(30,24,16,.72);color:#fff;border:2px solid rgba(255,255,255,.35);box-shadow:0 4px 0 rgba(0,0,0,.45)}
 .ctl button.on{background:var(--acc);color:#1c1712;box-shadow:0 0 18px rgba(224,161,0,.8);transform:translateY(3px)}
 body.demo header .bar,body.demo #al,body.demo .wrap>*:not(canvas):not(#ov):not(#ttl),body.demo .ctl{visibility:hidden!important}body.demo #ov,body.demo #ttl{visibility:visible!important}body.ttl #ov,body.demo.ttl #ov{visibility:hidden!important}body.demo header h1,body.demo #hint,body.ttl header h1,body.ttl #hint{visibility:hidden!important}
-#ov[data-s=main]{background:radial-gradient(ellipse at 50% 30%,rgba(40,26,10,.42),rgba(8,5,2,.72));-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px)}
+#ov[data-s=main]{background:radial-gradient(ellipse at 50% 30%,rgba(30,34,40,.4),rgba(5,6,8,.72));-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px)}
 #ov::before,#ov::after{content:'';position:absolute;left:0;right:0;height:10px;background:repeating-linear-gradient(-45deg,#e0a100 0 14px,#1c1712 14px 28px);opacity:.9}
 #ov::before{top:0}#ov::after{position:relative;bottom:auto;left:auto;right:auto;flex:none;margin:6px -14px 0}
 #c{filter:contrast(1.07) saturate(1.16) brightness(1.03)}
@@ -311,11 +311,11 @@ h1{font-size:23px;letter-spacing:7px}
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10u</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10v</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10u"></script>
+<script src="musik.js?v=2026-11-10v"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -629,7 +629,7 @@ function nz(t,d,fr,q,g,ty,o){const s=AC.createBufferSource(),f=AC.createBiquadFi
 /* Menü-Sounds: eigener Gain (sfx ist im Menü-Demo stumm), Mindestabstand 60 ms */
 let uiG=null,uiT=0;function uiSw(t,d,f0,f1,g,q){const s=AC.createBufferSource(),f=AC.createBiquadFilter(),e=AC.createGain();s.buffer=nb;s.loop=true;f.type='bandpass';f.Q.value=q||2;f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);e.gain.setValueAtTime(.001,t);e.gain.exponentialRampToValueAtTime(g,t+d*.35);e.gain.exponentialRampToValueAtTime(.001,t+d);s.connect(f);f.connect(e);e.connect(uiG);s.start(t);s.stop(t+d+.02)}
 function uiPg(t,f,d,g){tone(t,f,f*.995,d,g,'sine',uiG);tone(t,f*2.76,f*2.74,d*.45,g*.45,'sine',uiG)}
-function sndUI(k){if(!AC||AC.state!=='running'||muted)return;const n=performance.now();if(n-uiT<60)return;uiT=n;if(!uiG){uiG=AC.createGain();uiG.connect(mg)}uiG.gain.value=TUNE.vs;const t=AC.currentTime;if(k==='m'){tone(t,240,120,.05,.12,'sine',uiG);nz(t,.02,5200,4,.07,'highpass',uiG);uiPg(t+.005,2100,.07,.035)}else if(k==='adj'){nz(t,.015,4500,4,.06,'highpass',uiG);nz(t+.035,.015,5500,4,.06,'highpass',uiG);tone(t,300,180,.04,.08,'sine',uiG);tone(t+.035,360,220,.04,.08,'sine',uiG)}else if(k==='ok'){tone(t,170,55,.18,.32,'sine',uiG);nz(t,.07,1200,.7,.16,'lowpass',uiG);uiSw(t,.16,700,5200,.14,1.5);uiPg(t+.03,1320,.38,.07);uiPg(t+.03,1980,.32,.05)}else if(k==='bk'){uiSw(t,.18,4200,500,.13,1.5);tone(t,420,160,.14,.12,'sine',uiG);nz(t,.04,900,.7,.08,'lowpass',uiG)}}
+function sndUI(k){if(!AC||AC.state!=='running'||muted)return;const n=performance.now();if(n-uiT<60)return;uiT=n;if(!uiG){uiG=AC.createGain();uiG.connect(mg)}uiG.gain.value=TUNE.vs;const t=AC.currentTime;if(k==='m'){tone(t,240,120,.05,.12,'sine',uiG);nz(t,.02,5200,4,.07,'highpass',uiG);uiPg(t+.005,2100,.07,.035)}else if(k==='adj'){nz(t,.015,4500,4,.06,'highpass',uiG);nz(t+.035,.015,5500,4,.06,'highpass',uiG);tone(t,300,180,.04,.08,'sine',uiG);tone(t+.035,360,220,.04,.08,'sine',uiG)}else if(k==='ok'){nz(t,.025,2600,3,.15,'bandpass',uiG);tone(t,540,500,.03,.05,'square',uiG);nz(t+.045,.03,3600,3,.13,'bandpass',uiG);uiSw(t,.16,700,5200,.14,1.5);uiPg(t+.03,1320,.38,.07);uiPg(t+.03,1980,.32,.05)}else if(k==='bk'){uiSw(t,.18,4200,500,.13,1.5);tone(t,420,160,.14,.12,'sine',uiG);nz(t,.04,900,.7,.08,'lowpass',uiG)}}
 const BR=['0.00.00.0.003.1.','0.00.00.00.06.5.','0.00.00.0.003.1.','5.55.55.3.331.0.'];
 let smB=null,smS=null,smG=null,smOff=0,smT0=0,smLd=0;
 function smLoad(){if(smB||smLd||!AC)return;smLd=1;try{const b=atob(window.MUS1),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);AC.decodeAudioData(u.buffer,r=>{smB=r},()=>{smLd=2})}catch(e){smLd=2}}
