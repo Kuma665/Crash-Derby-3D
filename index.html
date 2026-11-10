@@ -338,11 +338,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-11d</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-11e</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-11d"></script>
+<script src="musik.js?v=2026-11-11e"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -841,7 +841,7 @@ function stepShells(){stepRings();
   shells=shells.filter(s=>{if(s.l>0)return true;S.remove(s.m);return false});
 }
 /* ===== Weitere Fähigkeiten (nur Spieler): 0 Schild, 1 Rammstoß, 2 Dash, 3 Schockwelle, 4 Kanone ===== */
-const ABCD=[720,480,360,540,SHCD,540,480,600],LB=[0,0,0,0];let rings=[];
+const ABCD=[720,480,360,540,SHCD,540,420,600],LB=[0,0,0,0];let rings=[];
 const HPT=tex(64,64,(g,w,h)=>{g.shadowColor='#3dff5e';g.shadowBlur=8;g.fillStyle='#7dff93';g.fillRect(w*.4,h*.16,w*.2,h*.68);g.fillRect(w*.16,h*.4,w*.68,h*.2)});let HPS=[];
 function healPlus(c){if(HPS.length>=(NP>2?4:8))return;const m=new THREE.SpriteMaterial({map:HPT,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,fog:false,opacity:0}),s=new THREE.Sprite(m);s.scale.set(11,11,1);S.add(s);HPS.push({s,m,c,ox:(Math.random()-.5)*20,oy:(Math.random()-.5)*14,h:10,vh:.5+Math.random()*.3,l:44,l0:44})}
 /* Bereit-Symbol ueber dem eigenen Auto: Faehigkeit = orange Plakette mit Funkelstern, Ulti = goldene mit Stern; 1 Sprite pro Spieler, ca. 0,8 s */
