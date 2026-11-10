@@ -329,11 +329,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ac</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ad</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10ac"></script>
+<script src="musik.js?v=2026-11-10ad"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1057,33 +1057,22 @@ function control(c){if(state==='play'&&endT>0&&!RACE&&c.hp>0&&aliveCars.length==
   if(cdT>0)return[0,0,0,0];
   if(c.hi>=0&&state!=='idle')return inp(c.hi);
   if(RACE){const info=trackInfo(c.x,c.y),p=trackPoint(info.idx+7),lane=cl(c.ln,-TRACK_HALF*.38,TRACK_HALF*.38),d=nrm(Math.atan2(p.y+info.ny*lane-c.y,p.x+info.nx*lane-c.x)-c.a);let tt=[.8,.92,1][TUNE.bd|0],st=cl(d*[2.5,3.5,4.5][TUNE.bd|0],-1,1);if(Math.hypot(c.vx,c.vy)<.5)c.stuck++;else c.stuck=0;if(c.stuck>40){c.rev=45;c.stuck=0}{let hb=-1;for(const o of cars)if(o.hi>=0&&o.hp>0&&o.prog>hb)hb=o.prog;if(hb>=0&&!c.fin){const g=(c.prog-hb)/TRACKS[RMAP].length;if(g>.25)tt*=.92;else if(g<-.25)tt*=1.08}}if(c.rev>0){c.rev--;tt=-1;st=-st}return[tt,st,botNit(c,TUNE.bd&&Math.abs(d)<.12&&c.rev<=0)?1:0,0,botAb(c)]}
-  let t=null,bd=1e9;const lv=TUNE.bd|0;if(c.bpa===undefined)c.bpa=.7+Math.random()*.6;
-  if(c.tg&&(c.tg.hp<=0||ally(c.tg,c)||cars.indexOf(c.tg)<0))c.tg=null;
-  if(!c.tg||(c.tgk=(c.tgk|0)-1)<=0){let bs=1e9;const now=performance.now();
-    for(const o of cars){if(o===c||o.hp<=0||ally(o,c))continue;let s=Math.hypot(o.x-c.x,o.y-c.y);
-      if(o.hi>=0){s*=[1.2,1,.8][lv];let n=0;for(const q of cars)if(q!==c&&q.hi<0&&q.hp>0&&q.tg===o)n++;if(n>=[1,2,2][lv])s*=2.2}
-      if(lv&&o===c.lh&&now-c.lt<4000)s*=.65;if(lv)s*=.75+.25*o.hp/o.hm;
-      s*=1+.2*Math.abs(nrm(Math.atan2(o.y-c.y,o.x-c.x)-c.a));if(o===c.tg)s*=.75;if(s<bs){bs=s;t=o}}
-    c.tg=t;c.tgk=25+(Math.random()*25|0)}
-  t=c.tg;if(!t)return[0,0];bd=Math.hypot(t.x-c.x,t.y-c.y);
+  let t=null,bd=1e9;
+  for(const o of cars){if(o===c||o.hp<=0||ally(o,c))continue;const d=Math.hypot(o.x-c.x,o.y-c.y)*(TUNE.bd===2&&o.hi>=0?.6:1);if(d<bd){bd=d;t=o}}
+  if(!t)return[0,0];
   let tx=t.x,ty=t.y,com=false;const m=70;
   {const bz=TUNE.bd|0,dd=Math.hypot(t.x-c.x,t.y-c.y),tv=Math.hypot(t.vx,t.vy),cv=Math.hypot(c.vx,c.vy),same=tv>1&&cv>1&&(t.vx*c.vx+t.vy*c.vy)/(tv*cv)>.6;
    if(dd<170&&same&&Math.abs(cv-tv)<1.2)c.tail=(c.tail|0)+1;else c.tail=Math.max(0,(c.tail|0)-2);
    if(bz>0&&c.tail>70){c.flk=100;c.tail=0;c.sd=Math.random()<.5?-1:1}
-   const lead=Math.min(22,dd/7)*[0,.6,1][bz];tx=t.x+t.vx*lead;ty=t.y+t.vy*lead;
-    if(bz&&dd>70&&dd<520&&!(c.flk>0)){const fx=Math.cos(t.a),fy=Math.sin(t.a),sg=(fx*(c.y-t.y)-fy*(c.x-t.x))>=0?1:-1,k=Math.min(80,(dd-60)*.3)*[0,.55,.9][bz]*c.bpa;tx-=fy*sg*k;ty+=fx*sg*k}
-   if(c.flk>0){c.flk--;const nx=-t.vy,ny=t.vx,nl=Math.hypot(nx,ny)||1;tx=t.x+t.vx*16+nx/nl*95*c.sd;ty=t.y+t.vy*16+ny/nl*95*c.sd}
+   const lead=Math.min(22,dd/7)*[0,.6,1][bz];tx=t.x+t.vx*lead;ty=t.y+t.vy*lead;   if(c.flk>0){c.flk--;const nx=-t.vy,ny=t.vx,nl=Math.hypot(nx,ny)||1;tx=t.x+t.vx*16+nx/nl*95*c.sd;ty=t.y+t.vy*16+ny/nl*95*c.sd}
    {const cm=[130,200,280][bz];com=!(c.flk>0)&&dd<cm&&(MAP?outsideArena(t.x,t.y,m):t.x<m||t.x>W-m||t.y<m||t.y>W-m)}
    if(!com){if(MAP===1){const qx=(tx-W/2)/(AX-100),qy=(ty-W/2)/(BY-100),qq=qx*qx+qy*qy;if(qq>1){const k=1/Math.sqrt(qq);tx=W/2+(tx-W/2)*k;ty=W/2+(ty-W/2)*k}}else if(MAP>=2){const p=arenaPoint(tx,ty,m);tx=p.x;ty=p.y}else{tx=cl(tx,m,W-m);ty=cl(ty,m,W-m)}}}
   if(!com&&((MAP<2&&((c.x<m&&Math.cos(c.a)<0)||(c.x>W-m&&Math.cos(c.a)>0)||(c.y<m&&Math.sin(c.a)<0)||(c.y>W-m&&Math.sin(c.a)>0)))||(MAP&&outsideArena(c.x,c.y,90)))){tx=W/2;ty=W/2}
   let slow=0;if(MAP===1&&t.z>PH-4&&c.z<PH-4){let br=RMP[0],bq=1e9;for(const q of RMP){const e=Math.hypot(q.cx-q.dx*(RL/2+120)-c.x,q.cy-q.dy*(RL/2+120)-c.y);if(e<bq){bq=e;br=q}}
     if(onRamp(c.x,c.y)){tx=c.x+br.dx*150;ty=c.y+br.dy*150}else{const qx=c.x-br.cx,qy=c.y-br.cy,u=qx*br.dx+qy*br.dy,k=u>-RL/2-20?-RL/2-120:Math.min(0,u+130);tx=br.cx+br.dx*k;ty=br.cy+br.dy*k;slow=1}}
-  const low=lv>0&&c.hp<c.hm*.35;
-  if(ITM.length&&bd>(low?140:300)&&!(c.z-mapH(c.x,c.y)>8)){let bi=null,bq=low?1200:700;for(const it of ITM){const e=Math.hypot(it.x-c.x,it.y-c.y);if(e<bq){bq=e;bi=it}}if(bi){tx=bi.x;ty=bi.y}}
+  if(ITM.length&&bd>300&&!(c.z-mapH(c.x,c.y)>8)){let bi=null,bq=700;for(const it of ITM){const e=Math.hypot(it.x-c.x,it.y-c.y);if(e<bq){bq=e;bi=it}}if(bi){tx=bi.x;ty=bi.y}}
   if(GM===5){const e=Math.hypot(FR.x-c.x,FR.y-c.y);if(e>FR.r-90){tx=FR.x;ty=FR.y}}
   if(GM===4&&!(c.z-mapH(c.x,c.y)>8)&&bd>110){const e=Math.hypot(ZN.x-c.x,ZN.y-c.y);if(e>ZR*.55&&(e<1100||bd>260)){tx=ZN.x;ty=ZN.y}}
-  if(low&&!(c.dg>0)&&bd<260){const tv=Math.hypot(t.vx,t.vy);if(tv>3&&(t.vx*(c.x-t.x)+t.vy*(c.y-t.y))/(tv*bd)>.85&&t.hp>c.hp&&Math.random()<[0,.04,.07][lv]){const sg=(t.vx*(c.y-t.y)-t.vy*(c.x-t.x))>=0?1:-1;c.dg=28;c.dgx=-t.vy/tv*sg*220;c.dgy=t.vx/tv*sg*220}}
-  if(c.dg>0){c.dg--;const qx=c.x+c.dgx,qy=c.y+c.dgy;if(MAP?outsideArena(qx,qy,70):(qx<70||qx>W-70||qy<70||qy>W-70))c.dg=0;else{tx=qx;ty=qy}}
   const d=nrm(Math.atan2(ty-c.y,tx-c.x)-c.a);
   let th=Math.abs(d)>1.6?.3:1,st=cl(d*[2,3,4.5][TUNE.bd|0],-1,1);if(slow)th=Math.min(th,.55);
   {const cv=Math.hypot(c.vx,c.vy),ad=Math.abs(d);if(cv>2.5&&ad>.45&&!c.air){const tr=cv*(1+cv*.05)/(.056*(TUNE.str||1)*(c.tm||1));if(Math.hypot(tx-c.x,ty-c.y)<2*tr*Math.sin(Math.min(ad,1.57)))th=cv>4?-.6:0}}
@@ -1269,7 +1258,7 @@ requestAnimationFrame(t=>{last=t;renderLast=t;loop(t)});
 [['t1','dmg','v1'],['t2','spd','v2'],['t3','str','v3']].forEach(([id,k,v])=>{const e=$(id);e.value=TUNE[k];$(v).textContent=Math.round(TUNE[k]*100)+'%';e.oninput=()=>{TUNE[k]=+e.value;$(v).textContent=Math.round(TUNE[k]*100)+'%';try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}});
 const setVh=()=>document.documentElement.style.setProperty('--vh',innerHeight/100+'px');setVh();addEventListener('resize',setVh);addEventListener('orientationchange',()=>setTimeout(setVh,300));
 if(!document.documentElement.requestFullscreen)$('fs').hidden=true;
-$('fs').onclick=()=>{const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen().then(()=>{try{screen.orientation.lock('landscape')}catch(x){}}).catch(()=>{})}catch(x){}};
+$('fs').onclick=()=>{const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else d.documentElement.requestFullscreen().then(()=>{try{screen.orientation.lock('landscape').catch(()=>{})}catch(x){}}).catch(()=>{})}catch(x){}};
 [['t7','vm','v7'],['t8','vs','v8']].forEach(([id,k,v])=>{const e=$(id);e.value=TUNE[k];$(v).textContent=Math.round(TUNE[k]*100)+'%';e.oninput=()=>{TUNE[k]=+e.value;$(v).textContent=Math.round(TUNE[k]*100)+'%';if(mus)mus.gain.value=.9*TUNE.vm;if(sfx)sfx.gain.value=TUNE.vs;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}});
 $('cb').onclick=()=>camToggle(0);[0,1,2,3].forEach(()=>{const e=document.createElement('div');e.className='ar';e.style.display='none';$('feed').parentNode.appendChild(e);ARS.push(e)});
 {const e=$('t12');e.value=TUNE.mt|0;e.onchange=()=>{TUNE.mt=+e.value;stp=0;nextT=0;smp(0);smOff=0;try{localStorage.setItem('cdt',JSON.stringify(TUNE))}catch(x){}}}
@@ -1382,7 +1371,7 @@ addEventListener('keydown',e=>{if(TTL||OV.hidden||SCR==='pick'||state==='play'||
 (function nl(){requestAnimationFrame(nl);const ps=gps();if(!ps.length)return;const p=ps.find(q=>q.mapping!=='standard')||ps[0],B=i=>ps.some(q=>q.buttons[i]&&q.buttons[i].pressed),a=!!B(0),b=!!B(1);if(TTL||OV.hidden||SCR==='pick'||state==='play'||state==='replay'){if(state==='replay'&&((a&&!NV.a)||(b&&!NV.b)))rpI=1e9;NV.a=a;NV.b=b;return}const n=performance.now(),ax=ps.reduce((m,q)=>Math.abs(q.axes[0]||0)>Math.abs(m)?q.axes[0]:m,0),ay=ps.reduce((m,q)=>Math.abs(q.axes[1]||0)>Math.abs(m)?q.axes[1]:m,0),h=p.axes[9],hi=(p.mapping!=='standard'&&typeof h==='number'&&Math.abs(h)<=1.05)?Math.round((h+1)/.2857):-1,D={u:B(12)||ay<-.6||[7,0,1].includes(hi),d:B(13)||ay>.6||[3,4,5].includes(hi),l:B(14)||ax<-.6||[5,6,7].includes(hi),r:B(15)||ax>.6||[1,2,3].includes(hi)};for(const k in D){if(D[k]){if(!(k in NV.t)){NV.t[k]=n+350;nav(k)}else if(n>NV.t[k]){NV.t[k]=n+110;nav(k)}}else delete NV.t[k]}if(a&&!NV.a)act();if(b&&!NV.b)back();NV.a=a;NV.b=b})();
 go('main',true);
 const TT=document.createElement('div');TT.id='ttl';TT.innerHTML='<div class="tb t"></div><div class="tb b"></div><div class="tw"><div class="tt1">CRASH</div><div class="tt2">DERBY</div><div class="tt3">3D</div><div class="tp">Drücke einen beliebigen Knopf, um zu starten</div></div>';$('feed').parentNode.appendChild(TT);
-function fsGo(){const d=document;if(d.fullscreenElement||!d.documentElement.requestFullscreen)return;try{d.documentElement.requestFullscreen().then(()=>{try{screen.orientation.lock('landscape')}catch(x){}}).catch(()=>{})}catch(x){}}
+function fsGo(){const d=document;if(d.fullscreenElement||!d.documentElement.requestFullscreen)return;try{d.documentElement.requestFullscreen().then(()=>{try{screen.orientation.lock('landscape').catch(()=>{})}catch(x){}}).catch(()=>{})}catch(x){}}
 const PAL=['#d62f2f','#e8731a','#f2c21b','#7ac943','#1fa854','#1bb5b5','#2d6fe0','#7a3fd1','#d63fa6','#f2f2f2','#8a8a8a','#222222'].map(h=>parseInt(h.slice(1),16));
 let PK={n:1,f:[0,0,0,0],r:[0,0,0,0],g:[0,0,0,0],go:0};const pkPrev=[{},{},{},{}],pkRep=[{},{},{},{}];
 function stBars(v){return[['Tempo',(v.a-.5)/.8],['Lenkung',(v.t-.6)/.7],['Gewicht',(v.m-.5)/2.1],['Leben',(v.hm-70)/55]].map(([n,x])=>`<div class="sr"><span>${n}</span><i><u style="width:${Math.round(cl(x,.08,1)*100)}%"></u></i></div>`).join('')}
