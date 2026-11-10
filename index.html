@@ -1,9 +1,8 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#121418"><meta name="mobile-web-app-capable" content="yes"></head><body>
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><title>Crash Derby 3D</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#121418"><meta name="mobile-web-app-capable" content="yes">
 <style>
 :root{--bg:#efe9df;--fg:#2a2118;--panel:#d9cfbe;--acc:#e0a100;--dng:#c23b22;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121418;--fg:#e8ebef;--panel:#262a30}}
@@ -330,11 +329,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ab</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ac</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10ab"></script>
+<script src="musik.js?v=2026-11-10ac"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1135,12 +1134,14 @@ function step(){
     A.x-=nx*ov;A.y-=ny*ov;B.x+=nx*ov;B.y+=ny*ov;
     const rel=(A.vx-B.vx)*nx+(A.vy-B.vy)*ny;
     if(rel>0){
-      const j2=rel*.62,wa=2*B.m/(A.m+B.m),wb=2*A.m/(A.m+B.m);crashFeel(A,B,nx,ny,rel);A.vx-=nx*j2*wa;A.vy-=ny*j2*wa;B.vx+=nx*j2*wb;B.vy+=ny*j2*wb;const vt=-(A.vx-B.vx)*ny+(A.vy-B.vy)*nx;A.vx+=ny*vt*.06*wa;A.vy-=nx*vt*.06*wa;B.vx-=ny*vt*.06*wb;B.vy+=nx*vt*.06*wb;
+      const hk=Math.max(0,rel-2.5),j2=rel*(.62+Math.min(.45,hk*.07)),wa=2*B.m/(A.m+B.m),wb=2*A.m/(A.m+B.m);crashFeel(A,B,nx,ny,rel);A.vx-=nx*j2*wa;A.vy-=ny*j2*wa;B.vx+=nx*j2*wb;B.vy+=ny*j2*wb;const vt=-(A.vx-B.vx)*ny+(A.vy-B.vy)*nx;A.vx+=ny*vt*.06*wa;A.vy-=nx*vt*.06*wa;B.vx-=ny*vt*.06*wb;B.vy+=nx*vt*.06*wb;
       if(rel>1){
         const da=Math.cos(A.a)*nx+Math.sin(A.a)*ny,db=-(Math.cos(B.a)*nx+Math.sin(B.a)*ny);
         const tn=performance.now(),fr=ally(A,B);if(!fr){if(da>.3){B.lh=A;B.lt=tn;A.p+=combo(A,rel);if(rel>(A.bh||0))A.bh=rel;if(rel>11)sndCheer()}if(db>.3){A.lh=B;A.lt=tn;B.p+=combo(B,rel);if(rel>(B.bh||0))B.bh=rel}}
         if(!fr)hurt(A,rel*2.4*(1.4-.8*da)*(A.nb?.6:1)*(B.nb?1.4:1)*(A.rm>0?.7:1)*(B.rm>0?1.8:1)*(B.rz>0?1.8:1)*Math.pow(B.m/A.m,.2),sd(A,nx,ny));if(!fr)hurt(B,rel*2.4*(1.4-.8*db)*(B.nb?.6:1)*(A.nb?1.4:1)*(B.rm>0?.7:1)*(A.rm>0?1.8:1)*(A.rz>0?1.8:1)*Math.pow(A.m/B.m,.2),sd(B,-nx,-ny));
-        spin(A,nx,ny,rel);spin(B,-nx,-ny,rel);sndCrash(rel);if(A.hi>=0)rumble(A.hi,rel*.4);if(B.hi>=0)rumble(B.hi,rel*.4);
+        spin(A,nx,ny,rel*(db>.3&&hk>0?1.7:1));spin(B,-nx,-ny,rel*(da>.3&&hk>0?1.7:1));sndCrash(rel);
+        if(!fr&&hk>0){const kk=Math.min(4,hk*.4);if(da>.3){B.vx+=nx*kk*wb*.5;B.vy+=ny*kk*wb*.5}if(db>.3){A.vx-=nx*kk*wa*.5;A.vy-=ny*kk*wa*.5}
+          if(!RACE&&state==='play'&&rel>3){const rv=[30,22,16][TUNE.bd|0];if(da>.3&&A.hi<0&&!(A.rev>0))A.rev=rv+(Math.random()*8|0);if(db>.3&&B.hi<0&&!(B.rev>0))B.rev=rv+(Math.random()*8|0)}}if(A.hi>=0)rumble(A.hi,rel*.4);if(B.hi>=0)rumble(B.hi,rel*.4);
         if(rel>4&&!fr){detach(A,sd(A,nx,ny));detach(B,sd(B,-nx,-ny))}
         {const mx=(A.x+B.x)/2,my=(A.y+B.y)/2;spark(mx,my,Math.min(40,rel*8|0));if(rel>6)for(let i=0;i<(NP>2?3:8);i++)add(mx,my,9,(Math.random()-.5)*4.5,(Math.random()-.5)*4.5,1+Math.random()*1.6,40,gsM);fx(mx,my,9,0,0,0,9,'f',18+rel*5);fx(mx,my,10,0,0,0,5,'n',14+rel*3);if(rel>2)for(let i=0;i<Math.min(14,rel*3|0);i++){const q=i%2?A:B;pxl(mx,my,8,(Math.random()-.5)*3,(Math.random()-.5)*3,1+Math.random()*2.2,30,q.o.bm,2.2,.15)}}if(rel>2.5)fx((A.x+B.x)/2,(A.y+B.y)/2,6,0,0,.1,24,'d',10);
         if(rel>3&&(A.hi>=0||B.hi>=0)){shake=Math.max(shake,Math.min(26,rel*1.9));kick=Math.max(kick,Math.min(14,rel*1.5));hs=Math.max(hs,Math.min(6,rel*.8|0))}
