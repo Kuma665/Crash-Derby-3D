@@ -329,11 +329,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10af</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-10ag</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-10af"></script>
+<script src="musik.js?v=2026-11-10ag"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1070,26 +1070,30 @@ function control(c){if(state==='play'&&endT>0&&!RACE&&c.hp>0&&aliveCars.length==
   {const bz=TUNE.bd|0,dd=Math.hypot(t.x-c.x,t.y-c.y),tv=Math.hypot(t.vx,t.vy),cv=Math.hypot(c.vx,c.vy),same=tv>1&&cv>1&&(t.vx*c.vx+t.vy*c.vy)/(tv*cv)>.6;
    if(dd<170&&same&&Math.abs(cv-tv)<1.2)c.tail=(c.tail|0)+1;else c.tail=Math.max(0,(c.tail|0)-2);
    if(bz>0&&c.tail>70){c.flk=100;c.tail=0;c.sd=Math.random()<.5?-1:1}
-   const lead=Math.min(22,dd/7)*[0,.6,1][bz]*(1-.6*rg);tx=t.x+t.vx*lead;ty=t.y+t.vy*lead;   if(c.flk>0){c.flk--;const nx=-t.vy,ny=t.vx,nl=Math.hypot(nx,ny)||1;tx=t.x+t.vx*16+nx/nl*95*c.sd;ty=t.y+t.vy*16+ny/nl*95*c.sd}
+   const lead=Math.min(22,dd/7)*[0,.6,1][bz]*(1-.6*rg);let px=t.x,py=t.y,pvx=t.vx,pvy=t.vy;if(t.hi>=0&&t.phi&&t.phi.i>16){const j=((t.phi.i-1-[12,6,4][bz])&15)*4,b=t.phi.b;px=b[j];py=b[j+1];pvx=b[j+2];pvy=b[j+3]}tx=px+pvx*lead;ty=py+pvy*lead;   if(c.flk>0){c.flk--;const nx=-t.vy,ny=t.vx,nl=Math.hypot(nx,ny)||1;tx=t.x+t.vx*16+nx/nl*95*c.sd;ty=t.y+t.vy*16+ny/nl*95*c.sd}
    {const cm=[130,200,280][bz];com=!(c.flk>0)&&dd<cm&&(MAP?outsideArena(t.x,t.y,m):t.x<m||t.x>W-m||t.y<m||t.y>W-m)}
    if(!com){if(MAP===1){const qx=(tx-W/2)/(AX-100),qy=(ty-W/2)/(BY-100),qq=qx*qx+qy*qy;if(qq>1){const k=1/Math.sqrt(qq);tx=W/2+(tx-W/2)*k;ty=W/2+(ty-W/2)*k}}else if(MAP>=2){const p=arenaPoint(tx,ty,m);tx=p.x;ty=p.y}else{tx=cl(tx,m,W-m);ty=cl(ty,m,W-m)}}}
   if(!com&&((MAP<2&&((c.x<m&&Math.cos(c.a)<0)||(c.x>W-m&&Math.cos(c.a)>0)||(c.y<m&&Math.sin(c.a)<0)||(c.y>W-m&&Math.sin(c.a)>0)))||(MAP&&outsideArena(c.x,c.y,90)))){tx=W/2;ty=W/2}
   let slow=0;if(MAP===1&&t.z>PH-4&&c.z<PH-4){let br=RMP[0],bq=1e9;for(const q of RMP){const e=Math.hypot(q.cx-q.dx*(RL/2+120)-c.x,q.cy-q.dy*(RL/2+120)-c.y);if(e<bq){bq=e;br=q}}
     if(onRamp(c.x,c.y)){tx=c.x+br.dx*150;ty=c.y+br.dy*150}else{const qx=c.x-br.cx,qy=c.y-br.cy,u=qx*br.dx+qy*br.dy,k=u>-RL/2-20?-RL/2-120:Math.min(0,u+130);tx=br.cx+br.dx*k;ty=br.cy+br.dy*k;slow=1}}
   if(rest&&!slow){const ex=c.x-t.x,ey=c.y-t.y,el=Math.hypot(ex,ey)||1,s=c.sd||1;tx=c.x+(ex*300-ey*s*180)/el;ty=c.y+(ey*300+ex*s*180)/el;if(MAP?outsideArena(tx,ty,m):(tx<m||tx>W-m||ty<m||ty>W-m)){tx=W/2;ty=W/2}}
+  let lurk=false;if(t.hi>=0&&!rest&&!slow&&!com&&GM!==4&&GM!==5){if(c.luc>0)c.luc--;const ld=Math.hypot(t.x-c.x,t.y-c.y);
+    if(!(c.lu>0)&&!(c.luc>0)&&ld>150&&ld<450&&Math.random()<[.012,.01,.005][TUNE.bd|0]){c.lu=60+(Math.random()*60|0);c.lus=Math.random()<.5?-1:1}
+    if(c.lu>0){c.lu--;const an=Math.atan2(c.y-t.y,c.x-t.x)+.55*c.lus,qx=t.x+Math.cos(an)*230,qy=t.y+Math.sin(an)*230;if(ld<110||(Math.hypot(t.vx,t.vy)>2.5&&ld<300&&(t.vx*(c.x-t.x)+t.vy*(c.y-t.y))/(Math.hypot(t.vx,t.vy)*ld)>.75)||(MAP?outsideArena(qx,qy,m):(qx<m||qx>W-m||qy<m||qy>W-m)))c.lu=0;else{tx=qx;ty=qy;lurk=true}if(!(c.lu>0))c.luc=[150,160,240][TUNE.bd|0]+(Math.random()*120|0)}}
   if(ITM.length&&bd>300&&!(c.z-mapH(c.x,c.y)>8)){let bi=null,bq=700;for(const it of ITM){const e=Math.hypot(it.x-c.x,it.y-c.y);if(e<bq){bq=e;bi=it}}if(bi){tx=bi.x;ty=bi.y}}
   if(GM===5){const e=Math.hypot(FR.x-c.x,FR.y-c.y);if(e>FR.r-90){tx=FR.x;ty=FR.y}}
   if(GM===4&&!(c.z-mapH(c.x,c.y)>8)&&bd>110){const e=Math.hypot(ZN.x-c.x,ZN.y-c.y);if(e>ZR*.55&&(e<1100||bd>260)){tx=ZN.x;ty=ZN.y}}
   const d=nrm(Math.atan2(ty-c.y,tx-c.x)-c.a);
-  let th=(Math.abs(d)>1.6?.3:1)*(1-.12*rg),st=cl(d*[2,3,4.5][TUNE.bd|0],-1,1);if(slow)th=Math.min(th,.55);
+  let th=(Math.abs(d)>1.6?.3:1)*(1-.12*rg)*(lurk?.8:1),st=cl(d*[2,3,4.5][TUNE.bd|0],-1,1);if(slow)th=Math.min(th,.55);
   {const cv=Math.hypot(c.vx,c.vy),ad=Math.abs(d);if(cv>2.5&&ad>.45&&!c.air){const tr=cv*(1+cv*.05)/(.056*(TUNE.str||1)*(c.tm||1));if(Math.hypot(tx-c.x,ty-c.y)<2*tr*Math.sin(Math.min(ad,1.57)))th=cv>4?-.6:0}}
   if(Math.hypot(c.vx,c.vy)<.5)c.stuck++;else c.stuck=0;
   if(c.stuck>40){c.rev=45;c.stuck=0}
   {const gd=Math.hypot(t.x-c.x,t.y-c.y),da=Math.abs(nrm(c.a-(c.gla===undefined?c.a:c.gla)));c.gla=c.a;if(c.rev<=0&&gd<160)c.glu=(c.glu||0)+da;else c.glu=0;if(c.glu>6.3){c.rev=24+(Math.random()*12|0);c.glu=0}}
   if(c.rev>0){c.rev--;th=-1;st=-st}
-  return[th,st,botNit(c,!rest&&rg<.5&&TUNE.bd!==0&&Math.abs(d)<.3&&bd>80&&bd<(TUNE.bd===2?450:300))?1:0,0,rest||Math.random()<rg*.6?0:botAb(c,t,d)];
+  return[th,st,botNit(c,!rest&&!lurk&&rg<.5&&TUNE.bd!==0&&Math.abs(d)<.3&&bd>80&&bd<(TUNE.bd===2?450:300))?1:0,0,rest||lurk||Math.random()<rg*.6?0:botAb(c,t,d)];
 }
 function step(){
+  for(const c of cars)if(c.hi>=0){const h=c.phi||(c.phi={i:0,b:new Float32Array(64)}),j=(h.i++&15)*4;h.b[j]=c.x;h.b[j+1]=c.y;h.b[j+2]=c.vx;h.b[j+3]=c.vy}
   itemStep();zoneStep();oilStep();brlStep();lowHp();rspStep();tipStep();skidStep();if(RACE&&!(cdT>0)&&state==='play')RCT++;
   if(cdT>0){cdT--;const e=$('cdn');e.textContent=cdT>0?Math.ceil(cdT/60):'GO!';{const col=cdT>120?'#ff3b2e':cdT>60?'#ff9a1a':cdT>0?'#ffd23d':'#46e05a';if(e.dataset.c!==col){e.dataset.c=col;e.style.color=col}}
     for(const c of cars){if(c.hi<0||c.hp<=0)continue;const th=inp(c.hi)[0]>.5;if(th&&!c.tsf)c.tsf=cdT+1;else if(!th)c.tsf=0;if(!cdT&&c.tsf){const ca=Math.cos(c.a),sa=Math.sin(c.a);if(c.tsf<=40){c.vx+=ca*5*TUNE.spd;c.vy+=sa*5*TUNE.spd;pmsg(c.hi,'🚀 Perfekter Start!','#46e05a');ach('ps');try{const s=JSON.parse(localStorage.getItem('cdst')||'{}');s.ps=(s.ps|0)+1;localStorage.setItem('cdst',JSON.stringify(s))}catch(x){}c.bst=75;boostFx(c,1);for(let q=0;q<(NP>2?6:14);q++)add(c.x-ca*14+(Math.random()-.5)*16,c.y-sa*14+(Math.random()-.5)*16,3,-ca*(1+Math.random()*2)+(Math.random()-.5),-sa*(1+Math.random()*2)+(Math.random()-.5),.3,30,dsM)}else{c.w=(Math.random()-.5)*.08;pmsg(c.hi,'💨 Fehlstart!','#e0a100');for(let q=0;q<(NP>2?5:12);q++)add(c.x-ca*12+(Math.random()-.5)*14,c.y-sa*12+(Math.random()-.5)*14,2,(Math.random()-.5)*1.2,(Math.random()-.5)*1.2,.4,40,dsM)}c.tsf=0}}if(AC&&cdT%60===0)tone(AC.currentTime,cdT?600:900,cdT?600:900,.18,.35,'square');if(!cdT){clearTimeout(cdClr);cdClr=setTimeout(()=>{e.textContent=''},800)}}
@@ -1137,7 +1141,7 @@ function step(){
         if(!fr)hurt(A,rel*2.4*(1.4-.8*da)*(A.nb?.6:1)*(B.nb?1.4:1)*(A.rm>0?.7:1)*(B.rm>0?1.8:1)*(B.rz>0?1.8:1)*Math.pow(B.m/A.m,.2),sd(A,nx,ny));if(!fr)hurt(B,rel*2.4*(1.4-.8*db)*(B.nb?.6:1)*(A.nb?1.4:1)*(B.rm>0?.7:1)*(A.rm>0?1.8:1)*(A.rz>0?1.8:1)*Math.pow(A.m/B.m,.2),sd(B,-nx,-ny));
         spin(A,nx,ny,rel*(db>.3&&hk>0?1.7:1));spin(B,-nx,-ny,rel*(da>.3&&hk>0?1.7:1));sndCrash(rel);
         if(!fr&&hk>0){const kk=Math.min(4,hk*.4);if(da>.3){B.vx+=nx*kk*wb*.5;B.vy+=ny*kk*wb*.5}if(db>.3){A.vx-=nx*kk*wa*.5;A.vy-=ny*kk*wa*.5}
-          if(!RACE&&state==='play'&&rel>3){const rv=[30,22,16][TUNE.bd|0];if(da>.3&&A.hi<0&&!(A.rev>0))A.rev=rv+(Math.random()*8|0);if(db>.3&&B.hi<0&&!(B.rev>0))B.rev=rv+(Math.random()*8|0);if(da>.3&&A.hi<0&&B.hi>=0){A.rp=70;A.rpT=B}if(db>.3&&B.hi<0&&A.hi>=0){B.rp=70;B.rpT=A}}}if(A.hi>=0)rumble(A.hi,rel*.4);if(B.hi>=0)rumble(B.hi,rel*.4);
+          if(!RACE&&state==='play'&&rel>3){const rv=[30,22,16][TUNE.bd|0];if(da>.3&&A.hi<0&&!(A.rev>0))A.rev=rv+(Math.random()*8|0);if(db>.3&&B.hi<0&&!(B.rev>0))B.rev=rv+(Math.random()*8|0);if(da>.3&&A.hi<0&&B.hi>=0){A.rp=[150,120,70][TUNE.bd|0];A.rpT=B}if(db>.3&&B.hi<0&&A.hi>=0){B.rp=[150,120,70][TUNE.bd|0];B.rpT=A}}}if(A.hi>=0)rumble(A.hi,rel*.4);if(B.hi>=0)rumble(B.hi,rel*.4);
         if(rel>4&&!fr){detach(A,sd(A,nx,ny));detach(B,sd(B,-nx,-ny))}
         {const mx=(A.x+B.x)/2,my=(A.y+B.y)/2;spark(mx,my,Math.min(40,rel*8|0));if(rel>6)for(let i=0;i<(NP>2?3:8);i++)add(mx,my,9,(Math.random()-.5)*4.5,(Math.random()-.5)*4.5,1+Math.random()*1.6,40,gsM);fx(mx,my,9,0,0,0,9,'f',18+rel*5);fx(mx,my,10,0,0,0,5,'n',14+rel*3);if(rel>2)for(let i=0;i<Math.min(14,rel*3|0);i++){const q=i%2?A:B;pxl(mx,my,8,(Math.random()-.5)*3,(Math.random()-.5)*3,1+Math.random()*2.2,30,q.o.bm,2.2,.15)}}if(rel>2.5)fx((A.x+B.x)/2,(A.y+B.y)/2,6,0,0,.1,24,'d',10);
         if(rel>3&&(A.hi>=0||B.hi>=0)){shake=Math.max(shake,Math.min(26,rel*1.9));kick=Math.max(kick,Math.min(14,rel*1.5));hs=Math.max(hs,Math.min(6,rel*.8|0))}
