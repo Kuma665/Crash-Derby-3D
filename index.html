@@ -337,11 +337,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-11i</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-11j</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-11i"></script>
+<script src="musik.js?v=2026-11-11j"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1339,7 +1339,7 @@ function snapRun(todo,rc){
   const oM=MAP,oRM=RMAP,oR=RACE,hid=[],oW=TUNE.wx,aw=800,ah=360,rt=new THREE.WebGLRenderTarget(aw,ah),oc=document.createElement('canvas'),fc=document.createElement('canvas'),buf=new Uint8Array(aw*ah*4),
     sv={rw:RWL.map(r=>r.visible),ob:OB.map(o=>o.m.visible),cn:CN.map(n=>n.m.visible),car:cars.map(c=>c.o.grp.visible),deb:deb.map(d=>d.m.visible),cld:CLD.map(s=>s.visible),sky:skyM.visible,fl:fl.visible,bg:S.background.clone()},roof=M2.userData.roof,rv=roof?roof.visible:true;
   oc.width=aw;oc.height=ah;fc.width=400;fc.height=180;
-  const cm=new THREE.PerspectiveCamera(42,aw/ah,10,9000),CP=[[0,1200,1700,0,0,120],[0,780,1120,0,0,90],[0,1450,2050,0,0,200],[0,1500,2100,0,0,200]];
+  const cm=new THREE.PerspectiveCamera(42,aw/ah,400,6000),CP=[[0,1200,1700,0,0,120],[0,780,1120,0,0,90],[0,1450,2050,0,0,200],[0,1500,2100,0,0,200]];
   try{
     TUNE.wx=0;applyWeather();S.fog.near=5000;S.fog.far=6000;
     if(rc!==undefined)RACE=rc;
