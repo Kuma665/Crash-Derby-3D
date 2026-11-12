@@ -399,11 +399,11 @@ body.p2 .dpn,body.p3 .dpn{font-size:17px;-webkit-text-stroke:3px #111}body.p2 .d
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 <label>Schadenszahlen <input type="checkbox" id="tdn"></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12v</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12w</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-12v"></script>
+<script src="musik.js?v=2026-11-12w"></script>
 <script>
 /* Eigene Icons statt Emojis: ICO[name]=[Palette,Pfad(64er-Raster),Ebenen[[Pfad,Farbe 0=dunkel/1=hell/'#..']],evenodd]. Emojis in Texten über EMAP → <em class="ic k-name">; el.iT = textContent mit Icons */
 const ICPAL={hp:['#c8ffb8','#4fe06a','#1f8a35'],nt:['#c8f2ff','#39c6ff','#0f6f9e'],ab:['#e6c4ff','#a64dff','#5a1a9e'],ul:['#fff3a8','#ffc21e','#c27a00'],sh:['#ffffff','#c3cdd8','#5f6b79'],wu:['#ffc2a8','#ff4a3a','#9e1a10'],or:['#ffe6a8','#ff8a1e','#b8360a'],bz:['#ffd8b0','#d0803a','#7a3a10'],gy:['#c8d0d8','#6a737d','#23282e'],pk:['#ffd0ec','#ff4fb0','#a01a6a']};
@@ -438,6 +438,7 @@ team:['nt',c(42,17,8)+'M28 50C28 37 35 30 42 30C51 30 59 37 59 50Z'+c(22,22,9)+'
 bulb:['ul',c(32,25,19)+'M23 40H41V48H23Z M25 50H39V57H25Z',[['M30 40V30L26 22h3l3 6l3-6h3l-4 8v10Z',0],['M23 44H41V46H23Z',0]]],
 ffa:['wu','M32 29L22 4H42Z M35 32L60 22V42Z M32 35L42 60H22Z M29 32L4 42V22Z'],
 tr:['wu',c(32,32,24)],tb:['nt',c(32,32,24)],
+tdm:['sh','M32 4Q44 10 55 9L55 30Q54 51 32 61Q10 51 9 30L9 9Q20 10 32 4Z',[['M0 0H37L28 27L37 37L27 64H0Z','rgba(255,58,40,.9)'],['M37 0H64V64H27L37 37L28 27Z','rgba(30,140,255,.9)'],['M35 0H39L30 27L39 37L29 64H25L35 37L26 27Z','#ffffff']]],
 pvb:['hp',c(18,20,8)+'M4 56C4 42 10 34 18 34C26 34 32 42 32 56Z M38 12H58V30H38Z M36 34H60V56H36Z M46 6H50V12H46Z',[[c(43,21,2.5)+c(53,21,2.5),0]]],
 bot:['sh','M14 18H50V50H14Z M30 9H34V18H30Z'+c(32,7,4)+'M8 28H14V40H8Z M50 28H56V40H50Z',[[c(24,31,5)+c(40,31,5),'#39c6ff'],['M22 41H42V45H22Z',0]]],
 timer:['nt',c(32,37,24)+'M26 3H38V9H26Z M30 9H34V14H30Z M49 14L54 19L50 23L45 18Z',[[c(32,37,18.5),'#eaf8ff'],['M30 22H34V37H30Z'+c(32,37,3.5),0]]],
@@ -475,7 +476,7 @@ lock:['gy','M18 28V20C18 10 24 4 32 4C40 4 46 10 46 20V28H40V20C40 14 36 10 32 1
 check:['hp','M5 33L14 24L26 36L50 12L59 21L26 54Z'],
 touch:['sh','M26 6C29 6 31 8 31 11V30L36 29C38 28 40 29 41 30L46 30C48 30 50 31 50 33L53 33C56 33 58 35 58 38V48C58 54 52 60 44 60H34C28 60 24 56 22 52L12 38C11 36 12 33 14 32C16 31 18 32 19 33L21 36V11C21 8 23 6 26 6Z'],
 rew:['wu','M30 10L4 32L30 54Z M58 10L32 32L58 54Z']});return R})();
-const EMAP={'🔥':'fire','💥':'boom','🏆':'trophy','🏁':'flag','👑':'crown','♛':'crown','🚀':'rocket','💨':'wind','🌀':'swirl','🏗':'crane','🛫':'jump','🎮':'pad','🕹':'stick','⌨':'kbd','📱':'phone','🎁':'box','🏚':'ruin','🏟':'arena','👥':'team','💡':'bulb','🌐':'ffa','🔴':'tr','🔵':'tb','🤝':'pvb','🤖':'bot','⏱':'timer','⏳':'hglass','🚗':'car','🖼':'monitor','🔊':'snd','🔇':'mute','📯':'horn','⛶':'full','🗺':'map','📷':'cam','⏸':'pause','◀':'ar_l','▶':'ar_r','▲':'ar_u','▼':'ar_d','🔁':'retry','🏠':'home','⚙':'gear','❓':'help','🎯':'target','🥇':'m1','🥈':'m2','🥉':'m3','🏅':'m4','🎖':'m5','☄':'comet','🛡':'sh','★':'ul','⭐':'ul','⚡':'bolt','☠':'skull','💀':'skull','♥':'heart','☢':'rad','✿':'flower','☯':'yin','⚠':'warn','⚔':'swords','🔧':'wrench','🛢':'barrel','🔔':'bell','📅':'cal','📊':'chart','🔒':'lock','✓':'check','✔':'check','👆':'touch','⏪':'rew'},ICR={},ICPC={},ICS={hp:1,nt:1,ab:1,ul:1,sh:1,wu:1};let ICSS=null;
+const EMAP={'🔴🔵':'tdm','🔥':'fire','💥':'boom','🏆':'trophy','🏁':'flag','👑':'crown','♛':'crown','🚀':'rocket','💨':'wind','🌀':'swirl','🏗':'crane','🛫':'jump','🎮':'pad','🕹':'stick','⌨':'kbd','📱':'phone','🎁':'box','🏚':'ruin','🏟':'arena','👥':'team','💡':'bulb','🌐':'ffa','🔴':'tr','🔵':'tb','🤝':'pvb','🤖':'bot','⏱':'timer','⏳':'hglass','🚗':'car','🖼':'monitor','🔊':'snd','🔇':'mute','📯':'horn','⛶':'full','🗺':'map','📷':'cam','⏸':'pause','◀':'ar_l','▶':'ar_r','▲':'ar_u','▼':'ar_d','🔁':'retry','🏠':'home','⚙':'gear','❓':'help','🎯':'target','🥇':'m1','🥈':'m2','🥉':'m3','🏅':'m4','🎖':'m5','☄':'comet','🛡':'sh','★':'ul','⭐':'ul','⚡':'bolt','☠':'skull','💀':'skull','♥':'heart','☢':'rad','✿':'flower','☯':'yin','⚠':'warn','⚔':'swords','🔧':'wrench','🛢':'barrel','🔔':'bell','📅':'cal','📊':'chart','🔒':'lock','✓':'check','✔':'check','👆':'touch','⏪':'rew'},ICR={},ICPC={},ICS={hp:1,nt:1,ab:1,ul:1,sh:1,wu:1};let ICSS=null;
 for(const e in EMAP)if(!ICR[EMAP[e]])ICR[EMAP[e]]=e;
 const EMRX=new RegExp('(?:'+Object.keys(EMAP).join('|')+')\\uFE0F?','gu');
 function icoP(d){return ICPC[d]||(ICPC[d]=new Path2D(d))}
