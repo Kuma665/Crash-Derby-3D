@@ -134,7 +134,7 @@ body.demo header .bar,body.demo #al,body.demo .wrap>*:not(canvas):not(#ov):not(#
 #ttl .tt3{font-size:clamp(22px,min(8vw,10vh),70px);font-weight:900;font-style:italic;color:#fff;background:#c8281e;padding:0 .5em;transform:skewX(-14deg);margin-top:.35em;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.6)}
 #ttl .tp{margin-top:6%;font-size:clamp(13px,min(3.2vw,4.2vh),24px);letter-spacing:2px;font-weight:800;color:#e8ebef;animation:ttb 1.3s ease-in-out infinite;text-shadow:0 2px 6px #000}@keyframes ttb{50%{opacity:.2}}
 .hud{transform:translate(0,-100%);margin:0 0 8px 10px;align-items:flex-start;width:min(26%,150px);gap:3px;opacity:.9}.hud .hi{display:none}.hud .fx{font-size:13px;line-height:1;white-space:nowrap;text-shadow:0 0 4px #000}.hud .fx:empty{display:none}.hud .hs b{font-size:28px}.hud .hs small{font-size:10px}.hud .hb{height:11px}.hud .hb.nn{height:8px}.hud.sm .hs b{font-size:20px}.hud.sm{width:min(26%,110px)}
-body.gp .ctl,body.gp .wrap>button,body.gp #nh{display:none!important}
+body.gp .ctl,body.gp .wrap>button,body.gp #nh{display:none!important}body.ntc .ctl,body.ntc #nh{display:none!important}
 #rot{display:none;position:fixed;inset:0;z-index:70;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(12,8,4,.96);color:#ffcf3d;text-align:center;padding:24px}#rot .ri{font-size:72px;animation:rr 2s ease-in-out infinite}#rot .rt{font-size:26px;font-weight:900;letter-spacing:1px}#rot .rs2{font-size:13px;color:#f1e6d0;opacity:.8}@keyframes rr{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}@media (orientation:portrait) and (pointer:coarse){#rot:not(.no){display:flex}}
 #hv,#lw{position:absolute;inset:0;pointer-events:none;border-radius:6px;opacity:0}
 #hv{background:radial-gradient(ellipse at center,transparent 35%,rgba(255,40,20,.85) 100%)}
@@ -307,7 +307,7 @@ body:not(.gp):not(.p2) .hud{left:calc(50% - 38px)!important;transform:translateX
 #ot.lg .l1{padding:.04em .2em .06em .1em;font-weight:900;font-style:italic;letter-spacing:.06em;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 #ot.lg .l3{font-size:.6em;font-weight:900;font-style:italic;letter-spacing:.12em;padding:0 .45em;transform:skewX(-14deg);}
 header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:0 .4em;margin-left:.5em;border-width:2px;transform:skewX(-14deg);vertical-align:.08em}header h1 .l1{letter-spacing:.12em}
-</style></head><body class="p1 ttl">
+</style></head><body class="p1 ttl"><script>try{if(!navigator.maxTouchPoints&&!matchMedia("(pointer:coarse)").matches)document.body.classList.add("ntc")}catch(x){}</script>
 <div id="ttl"><div class="tb t"></div><div class="tb b"></div><div class="tw"><div class="tt1">CRASH</div><div class="tt2">DERBY</div><div class="tt3">3D</div><div class="tp">Lädt …</div></div></div>
 <header><h1><span class="l1">CRASH DERBY</span><span class="l3">3D</span></h1><div class="bar bx"><div id="hp"></div><i class="nt"></i></div><div class="bar bx"><div id="hp2"></div><i class="nt"></i></div><div class="bar bx"><div id="hp3"></div><i class="nt"></i></div><div class="bar bx"><div id="hp4"></div><i class="nt"></i></div></header>
 <div class="wrap"><canvas id="c"></canvas><div class="dv"></div><div class="dh"></div><div class="lbl" style="left:12px">P1</div><div class="lbl" style="left:calc(50% + 12px)">P2</div><div class="lbl" style="left:12px;top:calc(50% + 10px)">P3</div><div class="lbl" style="left:calc(50% + 12px);top:calc(50% + 10px)">P4</div>
@@ -337,11 +337,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12n</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12o</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-12n"></script>
+<script src="musik.js?v=2026-11-12o"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -1543,7 +1543,7 @@ function ctlTx(){const b=gpl,s=(id,t)=>{const e=$(id);if(e&&e.textContent!==t)e.
 function ctlDet(){let ps=[];try{ps=gps()}catch(e){}if(!ps.length)return;const t=ps.some(p=>/dualsense|dualshock|playstation|054c|wireless controller/i.test(p.id||''))?'ps':'xb';if(t!==GPT){GPT=t;ctlTx()}}
 ctlTx();addEventListener('gamepadconnected',()=>setTimeout(ctlDet,50));
 var gpdN=0;(function gpd(){requestAnimationFrame(gpd);if(++gpdN%10&&document.body.classList.contains('gp'))return;if(gpdN%30===0){ctlDet();ctlTx()}const ps=gps();if(ps.some(q=>q.buttons.some(b=>b.pressed)||q.axes.slice(0,4).some(a=>Math.abs(a)>.5)))document.body.classList.add('gp');else if(!ps.length)document.body.classList.remove('gp')})();
-addEventListener('pointerdown',e=>{if(e.pointerType==='touch')document.body.classList.remove('gp')},true);
+try{if(!navigator.maxTouchPoints&&!matchMedia('(pointer:coarse)').matches)document.body.classList.add('ntc')}catch(x){}addEventListener('pointerdown',e=>{if(e.pointerType==='touch')document.body.classList.remove('gp','ntc')},true);
 {const r=document.createElement('div');r.id='rot';r.innerHTML='<div class="ri">📱</div><div class="rt">Bitte Handy drehen</div><div class="rs2">Im Querformat spielt es sich besser · Antippen = trotzdem hochkant spielen</div>';r.onclick=()=>r.classList.add('no');document.body.appendChild(r)}
 const PF=[0,1,2,3].map(()=>{const d=document.createElement('div');d.className='pm';$('feed').parentNode.appendChild(d);return d});
 function pmsg(i,t,col,ic){if(state==='idle'||!msgOk(i+':'+t))return;const p=PF[i];if(!p||i<0)return;const d=document.createElement('div');d.textContent=t;if(ic){const q=document.createElement('i');q.className='ic k-'+ic;d.prepend(q)}if(col)d.style.borderLeft='6px solid '+col;p.appendChild(d);setTimeout(()=>d.remove(),1800);while(p.children.length>2)p.firstChild.remove()}
