@@ -220,7 +220,7 @@ h1{font-size:15px}.bar{height:20px}.bx::before{font-size:11px;top:1px}#al{font-s
 #ov .pf button.gb.sel{background:#ffcf3d;color:#222;box-shadow:0 0 12px rgba(255,207,61,.9);outline:2px solid #fff}
 #ov .pc.rdy .rd{background:linear-gradient(#7ee07e,#2f9e44);color:#05260d;box-shadow:0 4px 0 #1b6a2d}
 .ttr{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.ttr h2{margin:0}
-#ov .tbn{width:34px;height:34px;padding:0;font-size:17px;line-height:1;text-transform:none;letter-spacing:0;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);border-radius:50%;box-shadow:none;position:absolute;top:8px;z-index:3}#ov .tbn:hover{transform:none}#ov #fs{right:10px}#ov #mu{right:52px}
+#ov .tbn{width:34px;height:34px;padding:0;font-size:17px;line-height:1;text-transform:none;letter-spacing:0;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);border-radius:50%;box-shadow:none;position:absolute;top:max(22px,env(safe-area-inset-top));z-index:3}#ov .tbn:hover{transform:none}#ov #fs{right:10px}#ov #mu{right:52px}
 .hud .hs b{padding:0 .18em 0 .04em;margin-right:-.18em}
 #ov[data-s=pick]{justify-content:flex-start;padding-top:max(34px,env(safe-area-inset-top));gap:8px}.pc{min-width:0}.st{display:flex;flex-direction:column;gap:3px;padding:2px 4px}.sr{display:grid;grid-template-columns:50px 1fr;align-items:center;gap:6px;font-size:11px;text-align:left}.sr span{white-space:nowrap;opacity:.85}.sr i{display:block;height:7px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden}.sr u{display:block;height:100%;background:linear-gradient(90deg,#ffcf3d,#ff7a1a);border-radius:4px;transition:width .2s}.pd{font-size:12px;line-height:1.25;height:2.5em;overflow:hidden;opacity:.85}.pf>span{min-width:0}.pf>span b,.pf>span small{white-space:nowrap;overflow:hidden;max-width:100%}.pc .ph+canvas+.pf{min-height:56px}
 .cp{width:100%;height:auto;display:block;border-radius:8px;background:radial-gradient(ellipse at 50% 70%,rgba(255,255,255,.14),rgba(255,255,255,.03))}
@@ -289,6 +289,7 @@ body.p2 #cdn .cdb i{width:26px;height:26px}
 #ov[data-s=pick] .ttr{display:none}
 #ov[data-s=pick] #pkh{display:none}
 #ov[data-s=pick] #bk{padding:8px;font-size:14px;order:-1;width:auto;min-width:140px;align-self:flex-start}
+#ov[data-s=pick]{justify-content:safe center;padding-top:max(22px,env(safe-area-inset-top))}
 #pk{gap:6px;width:100%}
 .pc{padding:5px;gap:3px;border-width:2px}
 .pc .ph{flex-direction:row;justify-content:center;gap:8px;align-items:baseline}
@@ -424,11 +425,11 @@ body.p3 .pts,body.p4 .pts{font-size:12px;padding:3px 9px}
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 <label>Schadenszahlen <input type="checkbox" id="tdn"></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12zn</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12zo</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-12zn"></script>
+<script src="musik.js?v=2026-11-12zo"></script>
 <script>
 /* Eigene Icons statt Emojis: ICO[name]=[Palette,Pfad(64er-Raster),Ebenen[[Pfad,Farbe 0=dunkel/1=hell/'#..']],evenodd]. Emojis in Texten über EMAP → <em class="ic k-name">; el.iT = textContent mit Icons */
 const ICPAL={hp:['#c8ffb8','#4fe06a','#1f8a35'],nt:['#c8f2ff','#39c6ff','#0f6f9e'],ab:['#e6c4ff','#a64dff','#5a1a9e'],ul:['#fff3a8','#ffc21e','#c27a00'],sh:['#ffffff','#c3cdd8','#5f6b79'],wu:['#ffc2a8','#ff4a3a','#9e1a10'],or:['#ffe6a8','#ff8a1e','#b8360a'],bz:['#ffd8b0','#d0803a','#7a3a10'],gy:['#c8d0d8','#6a737d','#23282e'],pk:['#ffd0ec','#ff4fb0','#a01a6a']};
@@ -1565,7 +1566,7 @@ function mmap(){const on=TUNE.mm!==0&&(state==='play'||state==='replay');mmc.sty
   for(const q of OIL)if(q.l>0){mx.fillStyle='rgba(10,14,10,.85)';mx.beginPath();mx.arc(q.x*s,q.y*s,Math.max(3,q.r*s),0,7);mx.fill()}
   if(GM===5&&FRM&&FRM.visible){mx.strokeStyle='#ff6a20';mx.lineWidth=4;mx.beginPath();mx.arc(FR.x*s,FR.y*s,FR.r*s,0,7);mx.stroke();mx.fillStyle='rgba(255,80,20,.22)';mx.beginPath();mx.rect(-400,-400,1040,1040);mx.arc(FR.x*s,FR.y*s,FR.r*s,0,7,true);mx.fill()}
   if(GM===4&&ZM&&ZM.visible){mx.strokeStyle=ZG.color.getStyle();mx.lineWidth=3;mx.globalAlpha=ZN.t<180&&((ZN.t/8|0)&1)?.3:.9;mx.beginPath();mx.arc(ZN.x*s,ZN.y*s,ZR*s,0,7);mx.stroke();mx.globalAlpha=.18;mx.fillStyle=mx.strokeStyle;mx.fill();mx.globalAlpha=1}
-  for(const it of ITM){mx.drawImage(ITI[it.t],it.x*s-10,it.y*s-10,20,20)}
+  {const pu=1+.18*Math.sin(performance.now()/180);for(const it of ITM){const x=it.x*s,y=it.y*s;mx.fillStyle=ITT[it.t][1];mx.beginPath();mx.arc(x,y,14*pu,0,7);mx.fill();mx.strokeStyle="#fff";mx.lineWidth=2.5;mx.stroke();mx.drawImage(ITI[it.t],x-12,y-12,24,24)}}
   mx.strokeStyle='rgba(150,150,150,.9)';mx.lineWidth=2;mx.beginPath();for(const c of cars){if(c.hp>0)continue;const x=c.x*s,y=c.y*s;mx.moveTo(x-4,y-4);mx.lineTo(x+4,y+4);mx.moveTo(x+4,y-4);mx.lineTo(x-4,y+4)}mx.stroke();
   const tp=performance.now()/1000;for(const pass of [0,1])for(const c of cars){if(c.hp<=0||(c.hi>=0)!==!!pass)continue;const thr=!pass&&GM!==1&&!RACE&&c.tg&&c.tg.hi>=0&&c.tg.hp>0,col=GM===1?hex(TCL[c.team]):pass?hex(SEL[c.hi].c):RACE||thr?'#ff3b2a':'#8f969f',r=pass?11:8;mx.save();mx.translate(c.x*s,c.y*s);if(thr){mx.globalAlpha=.3+.25*Math.sin(tp*9);mx.fillStyle='#ff3b2a';mx.beginPath();mx.arc(0,0,r*1.7,0,7);mx.fill();mx.globalAlpha=1}if(pass){mx.globalAlpha=.22+.18*Math.sin(tp*5);mx.fillStyle=col;mx.beginPath();mx.arc(0,0,r*1.9,0,7);mx.fill();mx.globalAlpha=1}mx.rotate(c.a);mx.beginPath();mx.moveTo(r*1.3,0);mx.lineTo(-r*.85,r*.8);mx.lineTo(-r*.4,0);mx.lineTo(-r*.85,-r*.8);mx.closePath();mx.fillStyle=col;mx.fill();mx.lineWidth=pass?3:2;mx.strokeStyle=pass?'#fff':'rgba(0,0,0,.8)';mx.stroke();mx.restore()}}
 var AQ=2,qCool=0,qBack=240,qUp=-9999,dtMin=16.7;function QQ(){return TUNE.q===undefined?2:TUNE.q===3?AQ:TUNE.q|0}function qApply(){PQ=NP>2?[.08,.12,.2][QQ()]:NP>1?.75:1;resize()}var RSC=1,dtA=16.7,rsCool=0,renderAcc=0,renderLast=0;var pzR=1;/* Pause: Standbild, nur bei Änderungen einmal neu zeichnen */addEventListener('change',()=>pzR=1,true);addEventListener('input',()=>pzR=1,true);document.addEventListener('visibilitychange',()=>pzR=1);addEventListener('focus',()=>pzR=1);
