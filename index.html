@@ -333,6 +333,24 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 .hud.sm .hb.nn{height:9px;margin-left:13px}.hud.sm .hb.nn.nt{width:calc(100% - 13px)!important}.hud.sm .hb.nn::before{width:13px;height:13px;left:-15px}
 .hud.sm .hrw .hb{height:8px}.hud.sm{width:min(30%,140px)}
 @media (orientation:landscape) and (max-height:520px){.hud.sm{width:min(26%,115px)}}
+/* ===== Ingame-HUD einheitlich: Metallplatten, schräg, gelb-schwarze Warnstreifen ===== */
+body .wrap #al{transform:translateX(-50%) skewX(-12deg);background:linear-gradient(#2c3139,#0d0f12);border:2px solid #050607;border-radius:4px;box-shadow:0 0 0 1px rgba(255,207,61,.7),0 4px 12px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.2);color:#fff;font-style:italic;font-weight:900;letter-spacing:2px;padding:3px 20px;text-shadow:0 2px 0 #000}
+body .wrap #al::before,body .wrap #al::after{content:'';position:absolute;top:0;bottom:0;width:9px;background:repeating-linear-gradient(-45deg,#ffcf3d 0 4px,#121417 4px 8px)}
+body .wrap #al::before{left:0}body .wrap #al::after{right:0}
+body .wrap>button{background:linear-gradient(#2c3139,#0d0f12)!important;border:2px solid #050607!important;border-radius:8px!important;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 3px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.18)}
+body .wrap>button:active{box-shadow:0 0 0 1px #ffcf3d,0 0 12px rgba(255,207,61,.6)}
+body .wrap #mm{border:2px solid #050607;box-shadow:0 0 0 1px rgba(255,207,61,.6),0 4px 16px rgba(0,0,0,.55)}
+body #feed div{transform:skewX(-10deg);border:0;border-left:5px solid #ff4d3a;border-radius:3px;background:linear-gradient(90deg,rgba(10,12,15,.93),rgba(34,38,45,.85));box-shadow:0 0 0 1px rgba(255,255,255,.2),0 4px 12px rgba(0,0,0,.5);font-style:italic;font-weight:900}
+body .pm div{transform:skewX(-10deg);border:0;border-left:5px solid #ffcf3d;border-radius:3px;background:linear-gradient(90deg,rgba(10,12,15,.93),rgba(34,38,45,.85));box-shadow:0 0 0 1px rgba(255,255,255,.2),0 4px 12px rgba(0,0,0,.5);font-style:italic;font-weight:900;text-transform:uppercase}
+body .pts{transform:skewX(-12deg);background:linear-gradient(#2c3139,#0d0f12);border-width:2px;border-radius:4px;box-shadow:0 4px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2);font-style:italic;font-size:14px;letter-spacing:1px;padding:4px 12px;text-shadow:0 2px 0 #000}
+body #rpl{transform:translateX(-50%) skewX(-12deg);border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 4px 12px rgba(0,0,0,.5);font-style:italic}
+body .lbl{background:linear-gradient(#2c3139,#0d0f12);border-left:4px solid #ffcf3d;border-radius:3px;padding:1px 9px;transform:skewX(-12deg);font-style:italic;font-weight:900;letter-spacing:1px;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.hud .hs b{background:linear-gradient(#fff 0,#fff 46%,#c3cad3 54%,#f4f6f8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 3px rgba(0,0,0,.8))}
+.hud.nit .hs b{background-image:linear-gradient(#fff 0,#dff6ff 40%,#5fd2ff 60%,#39c6ff 100%);text-shadow:none;filter:drop-shadow(0 2px 0 #000) drop-shadow(0 0 8px #39c6ff)}
+.hud .hs small{font-style:italic;font-weight:900;color:#ffcf3d;text-shadow:0 1px 0 #000,0 0 6px rgba(0,0,0,.8)}
+.hud .hs em.at{font-style:italic;font-weight:900;background:rgba(8,10,12,.75);border:1px solid rgba(164,92,255,.7);border-radius:3px;padding:1px 5px;color:#e2c9ff;text-shadow:none}
+.hud .hs em.at:empty{display:none}
+.hud .rpb{filter:drop-shadow(0 0 4px rgba(0,0,0,.6))}
 /* Touch: Lenkpfeile bündig am linken Rand wie Gas rechts */
 .ctl{left:14px;right:14px}
 </style></head><body class="p1 ttl"><script>document.body.classList.add("ld");try{if(!navigator.maxTouchPoints&&!matchMedia("(pointer:coarse)").matches)document.body.classList.add("ntc")}catch(x){}</script>
@@ -365,11 +383,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12r</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12s</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-12r"></script>
+<script src="musik.js?v=2026-11-12s"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
