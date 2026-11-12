@@ -337,11 +337,11 @@ header h1 .l3{display:inline-block;font-size:.72em;letter-spacing:.12em;padding:
 <label>Minimap <input type="checkbox" id="t11"></label>
 <label>Minimap-Größe <input type="range" id="t13" min=".6" max="2.2" step=".1"><span id="v13"></span></label>
 </details>
-<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12o</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
+<div id="pk" data-v="pick"></div><small id="pkh" data-v="pick">Jeder Spieler mit seinem Controller: ↑↓ Feld · ←→ ändern · A oder Start bereit · B zurück · L1/R1 Farbe · L2/R2 Fahrzeug · □/△ Zweitfarbe · Tastatur: P1 WASD+Leertaste, P2 Pfeile+Enter</small><small id="hlp" data-v="main map cars set how stats">Steuerkreuz/Stick: wählen · links/rechts: ändern · A: bestätigen · B: zurück</small><small id="ver" data-v="main" style="display:block;text-align:right;font-size:10px;opacity:.45">v2026-11-12p</small><button id="bk" data-v="mode map cars set how pick stats">◀ Zurück</button></div></div>
 <div class="ctl"><div><button data-k="l">◀</button><button data-k="r">▶</button></div><button data-k="h">📯</button><button data-k="s" style="display:none">💥</button><div><button data-k="b">▼</button><button data-k="g">▲</button></div></div>
 <p id="hint">Nitro am Handy: Gas halten und Finger nach oben wischen · Zum Spielen zu zweit: Handy quer halten oder an den Fernseher anschließen</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="musik.js?v=2026-11-12o"></script>
+<script src="musik.js?v=2026-11-12p"></script>
 <script>
 const cv=document.getElementById('c'),W=1920,$=id=>document.getElementById(id);
 const cols=[0xe0a100,0x2f7fb5,0x5a9a3c,0x8a4fb0,0xc23b22,0xdddddd];let NC=5;
@@ -938,7 +938,7 @@ function shieldFx(c){
     m.scale.set(27,16,19);m.position.y=9;o.grp.add(m);o.shm=m}
   const m=o.shm,U=m.material.uniforms;m.visible=true;if(c.shf===6&&SHDIR[c.shs]){U.uHD.value.fromArray(SHDIR[c.shs]);U.uHT.value=0}if(c.shf>0)c.shf--;U.uHT.value=Math.min(1,U.uHT.value+1/26);U.uT.value=camT;U.uO.value=c.sh<45?(Math.floor(c.sh/4)%2?.25:1):1;{const p=1+.03*Math.sin(camT*.2)+(1-U.uHT.value)*.05;m.scale.set(27*p,16*p,19*p)}
 }
-function ramFx(c){const ca=Math.cos(c.a),sa=Math.sin(c.a),x=c.x-ca*20,y=c.y-sa*20;for(let i=0;i<2;i++)fx(x+(Math.random()-.5)*8,y+(Math.random()-.5)*8,6,-ca*1.2,-sa*1.2,.1,16,'f',34+Math.random()*14);fx(x,y,6,0,0,0,5,'n',40);if(Math.random()<.6)pxl(x,y,6,-ca*3+(Math.random()-.5)*2,-sa*3+(Math.random()-.5)*2,.4,18,fiM,2,.05)}
+function ramFx(c){const ca=Math.cos(c.a),sa=Math.sin(c.a),x=c.x-ca*20,y=c.y-sa*20,czo=Math.max(0,(c.z||0)-GH(x,y));for(let i=0;i<2;i++)fx(x+(Math.random()-.5)*8,y+(Math.random()-.5)*8,czo+6,-ca*1.2,-sa*1.2,.1,16,'f',34+Math.random()*14);fx(x,y,czo+6,0,0,0,5,'n',40);if(Math.random()<.6)pxl(x,y,czo+6,-ca*3+(Math.random()-.5)*2,-sa*3+(Math.random()-.5)*2,.4,18,fiM,2,.05)}
 function dashFx(c){fx(c.x,c.y,7,0,0,0,9,'n',34);fx(c.x,c.y,7,0,0,0,6,'n',18);pxl(c.x,c.y,7,-c.vx*.2,-c.vy*.2,.2,14,whM,2,0)}
 /* Monstersprung-Landemarkierung (nur Spieler): Ring = Landestelle + Druckwellen-Radius, je Spieler ein Mesh */const MLM=[];
 function mlStep(c){let m=MLM[c.hi];const on=c.mpd&&c.air&&c.hp>0&&state==='play';if(!on){if(m)m.visible=false;return}
